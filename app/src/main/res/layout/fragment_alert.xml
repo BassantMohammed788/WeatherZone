@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AlertFragment">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/alertTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:backgroundTint="@color/lightBlue"
+
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="5dp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="@string/alerts"/>
+
+    </androidx.cardview.widget.CardView>
+    <ImageView
+        android:id="@+id/settingAlertIcon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="176dp"
+        android:src="@drawable/setting_alert_icon"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/alertTopBar"
+        tools:visibility="visible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/no_alerts"
+        android:textColor="@color/no_alert_icon"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/settingAlertIcon"
+        app:layout_constraintStart_toStartOf="@+id/settingAlertIcon"
+        app:layout_constraintTop_toBottomOf="@+id/settingAlertIcon"
+        tools:visibility="visible" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/alertFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="572dp"
+        android:backgroundTint="@color/veryLightBlue"
+        android:clickable="true"
+        android:src="@drawable/fav_add_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="@color/darkBlue"
+        tools:ignore="SpeakableTextPresentCheck" />
+</androidx.constraintlayout.widget.ConstraintLayout>
