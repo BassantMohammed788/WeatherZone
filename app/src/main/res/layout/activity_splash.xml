@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBFFFFFF"
+    tools:context=".SplashActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/splashTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:backgroundTint="@color/lightBlue"
+
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="5dp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/splashAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:fontFamily="cursive"
+            android:text="@string/app_name"
+            android:textStyle="bold"/>
+
+    </androidx.cardview.widget.CardView>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/splashAnimationView"
+        android:layout_width="362dp"
+        android:layout_height="357dp"
+        android:layout_above="@+id/splashTopBar"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="splash"
+        app:layout_constraintBottom_toTopOf="@+id/splashSloganTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.918"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="weatherSplash.json"
+        app:lottie_loop="false"
+        app:lottie_speed="1.5" />
+
+    <TextView
+        android:id="@+id/splashSloganTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/splashAnimationView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="212dp"
+        android:text="@string/slogan"
+        android:fontFamily="casual"
+        android:textColor="@color/lightBlue"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/intialSetupFragment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/splashSloganTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.500" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

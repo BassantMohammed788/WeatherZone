@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/intialSetupCardView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    app:cardCornerRadius="25dp"
+    tools:context=".IntialSetupFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_gradient_color"
+        android:padding="40dp">
+
+        <!-- Icon and Text -->
+        <ImageView
+            android:id="@+id/icon_image_view"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/nav_setting_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Location and Radio Buttons -->
+        <TextView
+            android:id="@+id/initial_setup_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:gravity="center_horizontal"
+            android:text="@string/initial_setup"
+            android:textColor="@color/darkBlue"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/icon_image_view"
+            app:layout_constraintStart_toEndOf="@id/icon_image_view"
+            app:layout_constraintTop_toTopOf="@id/icon_image_view"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/location_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/location"
+            android:textColor="@color/darkBlue"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_image_view" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/location_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/location_text_view"
+            app:layout_constraintTop_toTopOf="@id/location_text_view">
+
+            <RadioButton
+
+                android:id="@+id/splashGpsRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/darkBlue"
+                android:checked="true"
+                android:text="@string/gps"
+                android:textColor="@color/darkBlue"
+                android:textSize="20dp" />
+
+            <RadioButton
+                android:id="@+id/splashMapRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:buttonTint="@color/darkBlue"
+                android:text="@string/map"
+                android:textColor="@color/darkBlue"
+                android:textSize="20dp" />
+
+        </RadioGroup>
+
+        <!-- Notification and Switch -->
+        <TextView
+
+            android:id="@+id/notification_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/notifications"
+            android:textColor="@color/darkBlue"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radio_group" />
+
+        <Switch
+            android:id="@+id/splashNotificationSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:minWidth="58dp"
+            android:minHeight="58dp"
+            android:thumbTint="@color/veryLightBlue"
+            android:trackTint="@color/darkBlue"
+            app:layout_constraintBottom_toBottomOf="@id/notification_text_view"
+            app:layout_constraintStart_toEndOf="@id/notification_text_view"
+
+            app:layout_constraintTop_toTopOf="@id/notification_text_view"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <com.google.android.material.button.MaterialButton
+
+            android:id="@+id/splashOkBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkBlue"
+            android:text="@string/ok"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/splashNotificationSwitch"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
+
+

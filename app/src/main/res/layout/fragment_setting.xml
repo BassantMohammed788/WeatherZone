@@ -21,14 +21,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="@string/settings"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:text="@string/settings"/>
+            android:textSize="20sp" />
 
     </androidx.cardview.widget.CardView>
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -172,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="25dp"
                     android:buttonTint="@color/darkBlue"
-                    android:text="Gps"
+                    android:text="@string/gps"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
@@ -183,7 +184,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
                     android:buttonTint="@color/darkBlue"
-                    android:text="Map"
+                    android:text="@string/map"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
             </RadioGroup>
@@ -224,7 +225,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/notifications"
                 android:textColor="@color/darkBlue"
-                android:textSize="24sp"
+                android:textSize="23sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -258,7 +259,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginEnd="0dp"
                     android:buttonTint="@color/darkBlue"
                     android:text="@string/disable"
                     android:textColor="@color/white"

@@ -1,4 +1,4 @@
-package com.example.weatheapp
+package com.example.weatheapp.mainactivity
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

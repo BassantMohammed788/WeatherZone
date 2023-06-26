@@ -1,15 +1,11 @@
-package com.example.weatheapp
+package com.example.weatheapp.mainactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.example.weatheapp.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarItemView
-import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
     lateinit var pagerMain: ViewPager2
@@ -42,10 +38,10 @@ class MainActivity : AppCompatActivity() {
         })
         bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.menuNavHomeID-> pagerMain.currentItem=0
-                R.id.menuNavFavID-> pagerMain.currentItem=1
-                R.id.menuNavAlertID-> pagerMain.currentItem=2
-                R.id.menuNavSettingID-> pagerMain.currentItem=3
+                R.id.menuNavHomeID -> pagerMain.currentItem=0
+                R.id.menuNavFavID -> pagerMain.currentItem=1
+                R.id.menuNavAlertID -> pagerMain.currentItem=2
+                R.id.menuNavSettingID -> pagerMain.currentItem=3
 
             }
             true

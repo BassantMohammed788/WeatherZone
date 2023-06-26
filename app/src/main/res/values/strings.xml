@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weathe App</string>
+    <string name="app_name">WeatherZone</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="visibility">Visibility</string>
@@ -24,4 +24,9 @@
     <string name="home">Home</string>
     <string name="settings">Settings</string>
     <string name="alerts">Alerts</string>
+    <string name="slogan">From rain or shine,\n \t \t \t \t we\'ve got you covered</string>
+    <string name="initial_setup">Initial Setup</string>
+    <string name="gps">Gps</string>
+    <string name="map">Map</string>
+    <string name="ok">OK</string>
 </resources>
