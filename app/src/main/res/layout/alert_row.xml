@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/alert_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="15dp"
+    android:elevation="20dp"
+    app:cardCornerRadius="25dp"
+    app:cardElevation="20dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/alert_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:background="@drawable/card_gradient_color">
+
+
+        <TextView
+
+            android:id="@+id/alertRowFromDateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/from_date"
+            android:textColor="@color/darkBlue"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+
+            android:id="@+id/alertRowToDateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/to_date"
+            android:textColor="@color/darkBlue"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/alertRowFromDateTv"
+            app:layout_constraintStart_toEndOf="@id/dash"
+            app:layout_constraintTop_toTopOf="@+id/alertRowFromDateTv" />
+
+        <TextView
+
+            android:id="@+id/dash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:contentDescription="@string/toAlertSpace"
+            android:text="@string/toAlertSpace"
+
+            android:textColor="@color/lightBlue"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/alertRowFromDateTv"
+            app:layout_constraintStart_toEndOf="@+id/alertRowFromDateTv"
+            app:layout_constraintTop_toTopOf="@+id/alertRowFromDateTv"
+            app:layout_constraintVertical_bias="0.461"
+            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+
+        <ImageView
+            android:id="@+id/alertRowDeleteBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/fav_delete_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo" />
+
+        <TextView
+
+            android:id="@+id/alertRowFromTimeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/from_time"
+            android:textColor="@color/lightBlue"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/alertRowFromDateTv"
+            app:layout_constraintStart_toStartOf="@+id/alertRowFromDateTv"
+            app:layout_constraintTop_toBottomOf="@+id/alertRowFromDateTv"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+
+            android:id="@+id/alertRowToTimeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/to_time"
+            android:textColor="@color/lightBlue"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/alertRowToDateTv"
+            app:layout_constraintStart_toStartOf="@+id/alertRowToDateTv"
+            app:layout_constraintTop_toBottomOf="@+id/alertRowToDateTv"
+            tools:ignore="TextContrastCheck" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

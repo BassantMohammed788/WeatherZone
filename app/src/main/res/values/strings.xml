@@ -19,7 +19,7 @@
     <string name="wind_speed">Wind Speed</string>
     <string name="egypt_alexandria">Egypt Alexandria</string>
     <string name="no_places">No Places</string>
-    <string name="no_alerts">No Alerts</string>
+    <string name="no_alerts">No Alerts Yet</string>
     <string name="favourite">Favourite</string>
     <string name="home">Home</string>
     <string name="settings">Settings</string>
@@ -29,4 +29,20 @@
     <string name="gps">Gps</string>
     <string name="map">Map</string>
     <string name="ok">OK</string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
+    <string name="from_time">From Time</string>
+    <string name="to_time">To Time</string>
+    <string name="toAlertSpace" >           </string>
+    <string name="todo">TODO</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="alarm">Alarm</string>
+    <string name="from_date_time">From Date/Time</string>
+    <string name="to_date_time">To Date/Time</string>
+    <string name="save">Save</string>
+    <string name="notification">Notification</string>
+    <string name="weatherzone_alarm">WeatherZone Alarm</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="alarm_description">Alarm Description</string>
 </resources>

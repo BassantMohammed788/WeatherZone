@@ -12,7 +12,7 @@
     <androidx.cardview.widget.CardView
 
         android:backgroundTint="@android:color/transparent"
-        android:id="@+id/cardView"
+        android:id="@+id/alertDialogCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,14 +25,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:src="@drawable/fav_card_background" />
+            android:src="@drawable/fav_card_background"
+            android:contentDescription="TODO" />
 
         <ImageView
             android:id="@+id/favRowWeatherIcon"
             android:layout_width="155dp"
             android:layout_height="150dp"
-            android:layout_alignTop="@id/cardView"
-            android:layout_alignBottom="@id/cardView"
+            android:layout_alignTop="@id/alertDialogCardView"
+            android:layout_alignBottom="@id/alertDialogCardView"
             android:layout_gravity="end"
             android:layout_margin="0dp"
             android:elevation="8dp"
@@ -50,7 +51,8 @@
                 android:id="@+id/favRowDeleteBtn"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/fav_delete_icon" />
+                android:src="@drawable/fav_delete_icon"
+                tools:ignore="ImageContrastCheck" />
 
             <TextView
                 android:id="@+id/favRowCityName"
