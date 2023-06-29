@@ -86,7 +86,6 @@
                 android:gravity="center"
                 android:paddingStart="30dp"
                 android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:text="Clear Sky"
                 android:textColor="#FFFFFF"
                 tools:ignore="RtlSymmetry" />
