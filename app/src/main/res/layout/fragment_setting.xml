@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".SettingFragment">
+    tools:context=".settings.view.SettingFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/settingTopBar"
@@ -93,7 +93,7 @@
                     android:id="@+id/settingLanguageEnglishRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="2dp"
+                    android:layout_marginEnd="25dp"
 
                     android:buttonTint="@color/darkBlue"
                     android:text="@string/english"
@@ -171,7 +171,7 @@
                     android:id="@+id/settingLocationGpsRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="25dp"
+                    android:layout_marginEnd="50dp"
                     android:buttonTint="@color/darkBlue"
                     android:text="@string/gps"
                     android:textColor="@color/white"
@@ -247,7 +247,7 @@
                     android:id="@+id/settingNotificationEnabledRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="2dp"
+                    android:layout_marginEnd="25dp"
 
                     android:buttonTint="@color/darkBlue"
                     android:text="@string/enable"

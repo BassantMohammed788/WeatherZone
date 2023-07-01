@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".HomeFragment">
+        tools:context=".home.view.HomeFragment">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/homeTopBar"
@@ -144,7 +144,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pressure"
+                            android:text="@string/pressure"
                             android:textSize="14sp" />
 
                         <TextView
@@ -187,7 +187,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Humidity"
+                            android:text="@string/humidity"
                             android:textSize="10sp" />
 
                         <TextView
@@ -228,7 +228,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Wind"
+                            android:text="@string/wind_speed"
                             android:textSize="10sp" />
 
                         <TextView
@@ -278,7 +278,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Cloud"
+                            android:text="@string/cloud"
                             android:textSize="10sp" />
 
                         <TextView
@@ -319,7 +319,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ultra Violet"
+                            android:text="@string/ultra_violet"
                             android:textSize="10sp" />
 
                         <TextView

@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/card_gradient_color"
-        android:padding="40dp">
+        android:padding="20dp">
 
         <!-- Icon and Text -->
         <ImageView
@@ -79,7 +79,7 @@
                 android:id="@+id/intialMapRadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="0dp"
                 android:buttonTint="@color/darkBlue"
                 android:text="@string/map"
                 android:textColor="@color/darkBlue"

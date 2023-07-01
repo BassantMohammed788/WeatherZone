@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/menuNavHomeID"
-        android:title="Home"
+        android:title="@string/home"
         android:icon="@drawable/nav_home_icon"
         />
     <item
         android:id="@+id/menuNavFavID"
-        android:title="Favourites"
+        android:title="@string/favourite"
         android:icon="@drawable/nav_fav_icon"
         />
     <item
         android:id="@+id/menuNavAlertID"
-        android:title="Alerts"
+        android:title="@string/alerts"
         android:icon="@drawable/nav_alert_icon"
         />
     <item
         android:id="@+id/menuNavSettingID"
-        android:title="Setting"
+        android:title="@string/settings"
         android:icon="@drawable/nav_setting_icon"
         />
 

@@ -22,6 +22,7 @@
 
         <activity
             android:name=".SplashActivity"
+            android:configChanges="locale"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +36,7 @@
         </activity>
         <activity
             android:name=".mainactivity.MainActivity"
+            android:configChanges="locale"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

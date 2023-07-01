@@ -1,11 +1,13 @@
 package com.example.weatheapp
 
 import MyLocation
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.weatheapp.mainactivity.MainActivity
+import com.example.weatheapp.utilities.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -16,19 +18,29 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
+
+        val mySharedPreferences = MySharedPreferences.getInstance(this)
+        val language = mySharedPreferences.getLanguagePreference()
+        if (language == null) {
+            mySharedPreferences.saveLanguagePreference(Constants.ENGLISH.toString())
+        }
+        Log.i("TAG", "onCreate: $language")
+
         myLocation.loadFromSharedPreferences(this@SplashActivity)
         Log.d("splash", "Latitude: ${myLocation.lat}, Longitude: ${myLocation.lng}")
         GlobalScope.launch(Dispatchers.Main) {
             delay(2700)
-            if(myLocation.lat == 0.0 && myLocation.lng == 0.0) {
+            if (myLocation.lat == 0.0 && myLocation.lng == 0.0) {
                 val fragmentManager = supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.add(R.id.intialSetupFragment_container, IntialSetupFragment())
                 fragmentTransaction.commit()
-            }else{
+            } else {
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
             }
         }
-            }
     }
+
+}
