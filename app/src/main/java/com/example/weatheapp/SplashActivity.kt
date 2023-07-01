@@ -1,7 +1,6 @@
 package com.example.weatheapp
 
 import MyLocation
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,13 +18,12 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-
-        val mySharedPreferences = MySharedPreferences.getInstance(this)
+       /* val mySharedPreferences = MySharedPreferences.getInstance(this)
         val language = mySharedPreferences.getLanguagePreference()
         if (language == null) {
-            mySharedPreferences.saveLanguagePreference(Constants.ENGLISH.toString())
+            mySharedPreferences.saveLanguagePreference(Constants.en.toString())
         }
-        Log.i("TAG", "onCreate: $language")
+        Log.i("TAG", "onCreate: $language")*/
 
         myLocation.loadFromSharedPreferences(this@SplashActivity)
         Log.d("splash", "Latitude: ${myLocation.lat}, Longitude: ${myLocation.lng}")

@@ -24,9 +24,9 @@
     <string name="mile_hour">"ميل/ساعة "</string>
     <string name="favourite">" المفضلة"</string>
     <string name="alerts">التنبيهات</string>
-    <string name="slogan">مهما كانت الأحوال فإننا نضمن لك الحماية</string>
+    <string name="slogan">مهما كانت الأجواء نضمن لك الحماية</string>
     <string name="initial_setup">الاعدادات المبدأية</string>
-    <string name="gps">نظام تحديد المواقع</string>
+    <string name="gps">نظام المواقع</string>
     <string name="map">خريطة</string>
     <string name="ok">موافق</string>
     <string name="from_date">من تاريخ</string>
@@ -48,5 +48,12 @@
     <string name="pressure">الضغط</string>
     <string name="humidity">الرطوبة</string>
     <string name="cloud">السحب</string>
-    <string name="ultra_violet">قوق الينفسجية</string>
+    <string name="ultra_violet">فوق البنفسجية</string>
+    <string name="CDeg">°س</string>
+    <string name="FDeg">°ف</string>
+    <string name="KDeg">°ك</string>
+    <string name="metr">متر/ث</string>
+    <string name="mile">ميل/س</string>
+    <string name="hpa">هب</string>
+    <string name="visbilitym">م</string>
 </resources>

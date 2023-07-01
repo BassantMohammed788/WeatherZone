@@ -158,7 +158,6 @@
                 android:id="@+id/settingLocationRadioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@+id/settingLocationTV"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -169,9 +168,9 @@
 
                 <RadioButton
                     android:id="@+id/settingLocationGpsRadioButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="50dp"
+                    android:layout_marginEnd="20dp"
                     android:buttonTint="@color/darkBlue"
                     android:text="@string/gps"
                     android:textColor="@color/white"

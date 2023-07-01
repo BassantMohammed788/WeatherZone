@@ -44,9 +44,17 @@
     <string name="weatherzone_alarm">WeatherZone Alarm</string>
     <string name="dismiss">Dismiss</string>
     <string name="alarm_description">Alarm Description</string>
-    <string name="slogan">From rain or shine,  \t \t \t \t we\'ve got you covered</string>
+    <string name="slogan">From rain or shine,        \t \t \t \t we\'ve got you covered</string>
     <string name="pressure">Pressure</string>
     <string name="humidity">Humidity</string>
     <string name="cloud">Cloud</string>
     <string name="ultra_violet">Ultra Violet</string>
+    <string name="CDeg">°C</string>
+    <string name="FDeg">°F</string>
+    <string name="KDeg">°K</string>
+    <string name="metr">metr/s</string>
+    <string name="mile">mile/h</string>
+    <string name="hpa">hpa</string>
+    <string name="visbilitym">m</string>
+
 </resources>

@@ -2,12 +2,19 @@ package com.example.weatheapp.utilities
 
 enum class Constants {
     LANGUAGE,
-    ENGLISH,
-    ARABIC,
+    en,
+    ar,
     LOCATION_METHOD,
     GPS,
     MAP,
     NOTIFICATION_STATUS,
     ENABLED,
-    DISABLED
+    DISABLED,
+    TempratureUnit,
+    imperial,
+    metric,
+    standard,
+    WindUnit,
+    metr,
+    mile
 }

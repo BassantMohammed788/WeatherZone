@@ -11,7 +11,7 @@
         android:id="@+id/hourlyCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/lightBlue"
+        android:backgroundTint="@color/veryLightBlue"
         app:cardCornerRadius="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="1 AM"
-                android:textColor="@color/veryLightBlue"
+                android:textColor="@color/darkBlue"
                 android:textSize="12sp" />
 
             <FrameLayout
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="22 °C"
-                android:textColor="@color/veryLightBlue"
+                android:textColor="@color/darkBlue"
                 android:textSize="12sp" />
 
         </LinearLayout>

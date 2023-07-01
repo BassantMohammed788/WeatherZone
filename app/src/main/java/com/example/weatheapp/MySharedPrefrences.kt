@@ -1,8 +1,6 @@
 package com.example.weatheapp
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
 import com.example.weatheapp.utilities.Constants
 
 class MySharedPreferences private constructor(context: Context) {
@@ -27,7 +25,7 @@ class MySharedPreferences private constructor(context: Context) {
     }
 
     fun getLanguagePreference(): String? {
-        return sharedPreferences.getString(Constants.LANGUAGE.toString(), Constants.ENGLISH.toString())
+        return sharedPreferences.getString(Constants.LANGUAGE.toString(), Constants.en.toString())
     }
 
     fun saveLocationMethodPreference(locationMethod: String) {
@@ -44,5 +42,19 @@ class MySharedPreferences private constructor(context: Context) {
 
     fun getNotificationPreference(): String? {
         return sharedPreferences.getString(Constants.NOTIFICATION_STATUS.toString(), null)
+    }
+    fun saveTempratureUnitPreference(unit: String) {
+        sharedPreferences.edit().putString(Constants.TempratureUnit.toString(), unit).apply()
+    }
+
+    fun getTempratureUnitPreference(): String? {
+        return sharedPreferences.getString(Constants.TempratureUnit.toString(), null)
+    }
+    fun saveWindSpeedUnitPreference(unit: String) {
+        sharedPreferences.edit().putString(Constants.WindUnit.toString(), unit).apply()
+    }
+
+    fun getWindSpeedPreference(): String? {
+        return sharedPreferences.getString(Constants.WindUnit.toString(), null)
     }
 }

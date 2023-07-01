@@ -16,23 +16,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:backgroundTint="@color/lightBlue"
-
             android:layout_marginTop="8dp"
-            app:cardCornerRadius="20dp"
+
+            android:backgroundTint="@color/lightBlue"
             android:elevation="5dp"
             android:translationZ="10dp"
+            app:cardCornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:layout_gravity="center"
+                android:padding="10dp"
+                android:text="@string/home"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:text="@string/home"/>
+                android:textSize="20sp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -41,44 +42,57 @@
             android:id="@+id/homeCityTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
             android:text="@string/egypt_alexandria"
             android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeTopBar"
-             />
+            app:layout_constraintTop_toBottomOf="@+id/homeTopBar" />
 
         <TextView
             android:id="@+id/homeDegreeTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
             android:text=" 22 °C"
             android:textColor="@color/white"
-            android:textSize="40sp"
-            app:layout_constraintEnd_toEndOf="@+id/homeDateTv2"
-            app:layout_constraintStart_toStartOf="@+id/homeDateTv2"
-            app:layout_constraintTop_toBottomOf="@+id/homeDateTv2" />
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeCityTv" />
+
+        <TextView
+            android:id="@+id/homeWeatherDescTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 22 °C"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/homeWeatherIcon"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/homeWeatherIcon"
+            app:layout_constraintTop_toBottomOf="@+id/homeWeatherIcon" />
 
         <TextView
             android:id="@+id/homeDateTv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
             android:text="24/6/2022"
             android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="@+id/homeCityTv"
-            app:layout_constraintHorizontal_bias="0.487"
-            app:layout_constraintStart_toStartOf="@+id/homeCityTv"
-            app:layout_constraintTop_toBottomOf="@+id/homeCityTv" />
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@+id/homeDegreeTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/homeDegreeTv"
+            app:layout_constraintTop_toTopOf="@+id/homeDegreeTv"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/homeWeatherIcon"
-            android:layout_width="213dp"
-            android:layout_height="145dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/weather_icon"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,13 +103,12 @@
             android:id="@+id/homeHourlyRecycler"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
             android:orientation="horizontal"
             android:padding="15dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeWeatherIcon"
+            app:layout_constraintTop_toBottomOf="@+id/homeWeatherDescTv"
             tools:listitem="@layout/hourly_row" />
 
         <LinearLayout
@@ -121,8 +134,8 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
 
+                    android:layout_weight="1"
                     app:cardCornerRadius="15dp">
 
                     <LinearLayout
@@ -145,15 +158,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/pressure"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/homePressyreTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="1021 hpa"
-                            android:textColor="#263238"
-                            android:textSize="10sp" />
+                            android:textColor="@color/darkBlue"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -162,7 +175,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
@@ -188,14 +200,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/humidity"
-                            android:textSize="10sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/homeHumidityTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="77 %"
-                            android:textSize="10sp" />
+                            android:textColor="@color/darkBlue"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -204,8 +217,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="15dp">
@@ -229,14 +241,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/wind_speed"
-                            android:textSize="10sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/homeWindTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2.5 m/s"
-                            android:textSize="10sp" />
+                            android:textColor="@color/darkBlue"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -255,7 +268,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="15dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="15dp">
@@ -279,14 +292,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/cloud"
-                            android:textSize="10sp" />
+                            android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/hoeCloudTv"
+                            android:id="@+id/homeCloudTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0 %"
-                            android:textSize="10sp" />
+                            android:textColor="@color/darkBlue"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -295,7 +309,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
@@ -303,13 +316,13 @@
 
                     <LinearLayout
 
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/card_gradient_color"
                         android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -320,14 +333,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/ultra_violet"
-                            android:textSize="10sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/homeUltraTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0.0"
-                            android:textSize="10sp" />
+                            android:textColor="@color/darkBlue"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -336,21 +350,20 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="15dp">
 
                     <LinearLayout
 
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/card_gradient_color"
                         android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -361,13 +374,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/visibility"
-                            android:textSize="10sp" />
+                            android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/homeVisibilityTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="6000 m"
-                            android:textSize="10sp" />
+                            android:textColor="@color/darkBlue"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -384,12 +399,10 @@
             android:orientation="vertical"
             android:padding="15dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.448"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/homeLiniar"
-            app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/daily_row" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

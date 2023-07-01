@@ -17,7 +17,7 @@ data class Current(
     val sunset: Long,
     val temp: Double,
     val feels_like: Double,
-    val pressure: Int,
+    val pressure: Double,
     val humidity: Int,
     val dew_point: Double,
     val uvi: Double,
