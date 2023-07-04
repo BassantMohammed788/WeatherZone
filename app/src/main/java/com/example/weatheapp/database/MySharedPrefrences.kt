@@ -57,4 +57,29 @@ class MySharedPreferences private constructor(context: Context) {
     fun getWindSpeedPreference(): String? {
         return sharedPreferences.getString(Constants.WindUnit.toString(), null)
     }
+
+    fun saveMapDestination(destination:String){
+        sharedPreferences.edit().putString(Constants.MAP_DESTINATION.toString(),destination).apply()
+    }
+    fun getMapDestination():String?{
+        return sharedPreferences.getString(Constants.MAP_DESTINATION.toString(),null)
+    }
+    fun saveFavLat(lat:String){
+        sharedPreferences.edit().putString(Constants.FAVOURITE_LOCATION_LAT.toString(),lat).apply()
+    }
+    fun getFavLat():String?{
+        return sharedPreferences.getString(Constants.FAVOURITE_LOCATION_LAT.toString(),null)
+    }
+    fun saveFavLng(lat:String){
+        sharedPreferences.edit().putString(Constants.FAVOURITE_LOCATION_LNG.toString(),lat).apply()
+    }
+    fun getFavLng():String?{
+        return sharedPreferences.getString(Constants.FAVOURITE_LOCATION_LNG.toString(),null)
+    }
+    fun saveHomeDestination(destination:String){
+        sharedPreferences.edit().putString(Constants.HOMEDESTINATION.toString(),destination).apply()
+    }
+    fun getHomeDestination():String?{
+        return sharedPreferences.getString(Constants.HOMEDESTINATION.toString(),null)
+    }
 }

@@ -7,17 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.weatheapp.MySharedPreferences
+import com.example.weatheapp.R
 import com.example.weatheapp.databinding.FragmentSettingBinding
 import com.example.weatheapp.settings.viewmodel.SettingViewModel
 import com.example.weatheapp.settings.viewmodel.SettingViewModelFactory
 import com.example.weatheapp.utilities.Constants
+import getLastLocation
 
 class SettingFragment : Fragment() {
     private lateinit var binding: FragmentSettingBinding
     private lateinit var settingViewModelFactory: SettingViewModelFactory
     lateinit var settingViewModel: SettingViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,10 +65,10 @@ class SettingFragment : Fragment() {
         binding.settingLanguageRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 binding.settingLanguageEnglishRadioButton.id -> {
-                    settingViewModel.setLanguage(Constants.en.toString(), "en")
+                    settingViewModel.setLanguage(Constants.en.toString(), "en",requireContext())
                 }
                 binding.settingLanguageArabicRadioButton.id -> {
-                    settingViewModel.setLanguage(Constants.ar.toString(), "ar")
+                    settingViewModel.setLanguage(Constants.ar.toString(), "ar",requireContext())
                 }
             }
         }
@@ -74,9 +76,14 @@ class SettingFragment : Fragment() {
             when (checkedId) {
                 binding.settingLocationGpsRadioButton.id -> {
                     settingViewModel.setLocationMethod(Constants.GPS.toString())
+                    getLastLocation(requireContext(),{})
+
                    }
                 binding.settingLocationMapRadioButton.id -> {
                     settingViewModel.setLocationMethod(Constants.MAP.toString())
+                    mySharedPreferences.saveMapDestination(Constants.HOME.toString())
+                    Navigation.findNavController(view).navigate(R.id.action_menuNavSettingID_to_mapsFragment)
+
                 }
 
             }

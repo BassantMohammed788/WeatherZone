@@ -16,5 +16,14 @@ enum class Constants {
     standard,
     WindUnit,
     metr,
-    mile
+    mile,
+    MAP_DESTINATION,
+    FAVOURITE,
+    HOME,
+    FAVOURITE_LOCATION_LAT,
+    FAVOURITE_LOCATION_LNG,
+    FAVOURITE_LAT,
+    FAVOURITE_LNG,
+    HOMEDESTINATION,
+    FAVDETAIDETAILS
 }

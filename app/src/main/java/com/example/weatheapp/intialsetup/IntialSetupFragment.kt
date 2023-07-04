@@ -1,4 +1,4 @@
-package com.example.weatheapp
+package com.example.weatheapp.intialsetup
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.weatheapp.MySharedPreferences
+import com.example.weatheapp.R
 import com.example.weatheapp.databinding.FragmentIntialSetupBinding
 import com.example.weatheapp.mainactivity.MainActivity
+import com.example.weatheapp.map.MapsFragment
 import com.example.weatheapp.utilities.Constants
 import getLastLocation
 
@@ -25,11 +28,14 @@ class IntialSetupFragment : Fragment() {
         val mySharedPreferences = MySharedPreferences.getInstance(requireContext())
         binding.intialRadioGroup.clearCheck()
         binding.intialOkBtn.setOnClickListener {
+            mySharedPreferences.saveTempratureUnitPreference(Constants.standard.toString())
+            mySharedPreferences.saveWindSpeedUnitPreference(Constants.metr.toString())
             // Check which radio button is selected and take action accordingly
             val selectedRadioButtonId = binding.intialRadioGroup.checkedRadioButtonId
             when (selectedRadioButtonId) {
                 binding.intialMapRadio.id -> {
                     mySharedPreferences.saveLocationMethodPreference(Constants.MAP.toString())
+                    mySharedPreferences.saveMapDestination(Constants.HOME.toString())
                     val fragment = MapsFragment()
                     val transaction = parentFragmentManager.beginTransaction()
                     transaction.replace(R.id.intialSetupFragment_container, fragment)

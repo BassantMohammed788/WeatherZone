@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menuNavHomeID">
+
+    <fragment
+        android:id="@+id/menuNavHomeID"
+        android:name="com.example.weatheapp.home.view.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_menuNavHomeID_to_favouriteFragment"
+            app:destination="@id/menuNavFavID" />
+        <action
+            android:id="@+id/action_menuNavHomeID_to_alertFragment"
+            app:destination="@id/menuNavAlertID" />
+        <action
+            android:id="@+id/action_menuNavHomeID_to_settingFragment"
+            app:destination="@id/menuNavSettingID" />
+        <action
+            android:id="@+id/action_menuNavHomeID_to_menuNavFavID"
+            app:destination="@id/menuNavFavID" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuNavFavID"
+        android:name="com.example.weatheapp.favourite.view.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/action_menuNavFavID_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_menuNavFavID_to_menuNavHomeID"
+            app:destination="@id/menuNavHomeID" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuNavAlertID"
+        android:name="com.example.weatheapp.alert.AlertFragment"
+        android:label="fragment_alert"
+        tools:layout="@layout/fragment_alert" />
+    <fragment
+        android:id="@+id/menuNavSettingID"
+        android:name="com.example.weatheapp.settings.view.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_menuNavSettingID_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.weatheapp.map.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_menuNavHomeID"
+            app:destination="@id/menuNavHomeID" />
+    </fragment>
+</navigation>

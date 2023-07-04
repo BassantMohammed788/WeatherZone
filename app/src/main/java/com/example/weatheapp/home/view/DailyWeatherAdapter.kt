@@ -58,9 +58,7 @@ class DailyWeatherAdapter (private val mySharedPreferences: MySharedPreferences)
             holder.binding.dailyDescriptionTv.text = currentObject.weather[0].description
             val drawableResId = getIconResource(currentObject.weather[0].icon,context)
             holder.binding.dailyImage.setImageResource(drawableResId)
-
             Log.i("lang", "onBindViewHolder: $unit ")
-
         }
         if(position == 7){ binding.dailyConstraintLayout.visibility = View.INVISIBLE }
     }

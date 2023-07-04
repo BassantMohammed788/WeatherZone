@@ -56,4 +56,17 @@
     <string name="mile">ميل/س</string>
     <string name="hpa">هب</string>
     <string name="visbilitym">م</string>
+
+    <string name="yesMapAlert">نعم</string>
+    <string name="CancelMapAlert">لا</string>
+    <string name="messageFavMapAlert">هل تريد حفظ </string>
+    <string name="errorFavMapAlert">لا يوجد مكان للحفظ </string>
+
+    <string name="messageHomeMapAlert">هل تريد اختيار </string>
+
+    <string name="chooseSpecificPlace">اختر مكان محدد اكثر من فضلك</string>
+    <string name="addFavAlertTitle">اضافة مفضلة</string>
+    <string name="addFavAlertMessage"> لا يمكن إضافة المفضلة يرجى التحقق من الاتصال بالإنترنت أولاً</string>
+
+    <string name="openFavAlertMessage"> لا يمكن فتح المفضلة يرجى التحقق من الاتصال بالإنترنت أولاً</string>
 </resources>

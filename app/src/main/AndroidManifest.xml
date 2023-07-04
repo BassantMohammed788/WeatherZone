@@ -22,7 +22,7 @@
             android:value="AIzaSyC7HDH6U-DRhgiQjXGMRCxyoFLJkD5CRUY" />
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".splash.SplashActivity"
             android:configChanges="locale"
             android:exported="true">
             <intent-filter>

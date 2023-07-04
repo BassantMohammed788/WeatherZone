@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     android:background="@android:color/transparent"
     app:cardCornerRadius="25dp"
-    tools:context=".IntialSetupFragment">
+    tools:context=".intialsetup.IntialSetupFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"

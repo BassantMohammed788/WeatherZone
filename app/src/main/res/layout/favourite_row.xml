@@ -1,97 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/favRowConstrainLayout"
-
-    android:backgroundTint="@android:color/transparent"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:background="@drawable/card_gradient_color"
+    app:cardCornerRadius="20dp">
 
-    <androidx.cardview.widget.CardView
 
-        android:backgroundTint="@android:color/transparent"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/alertDialogCardView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/card_gradient_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <ImageView
-            android:id="@+id/background_image"
+        <TextView
+            android:id="@+id/favouriteRowCityTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/fav_card_background"
-            android:contentDescription="TODO" />
+            android:textColor="@color/darkBlue"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/favRowDeleteBtn"
+            app:layout_constraintHorizontal_bias="0.126"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/favRowWeatherIcon"
-            android:layout_width="155dp"
-            android:layout_height="150dp"
-            android:layout_alignTop="@id/alertDialogCardView"
-            android:layout_alignBottom="@id/alertDialogCardView"
-            android:layout_gravity="end"
-            android:layout_margin="0dp"
-            android:elevation="8dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/weather_icon" />
+            android:id="@+id/favRowDeleteBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/fav_delete_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck" />
 
 
-        <LinearLayout
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-            <ImageView
-                android:id="@+id/favRowDeleteBtn"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/fav_delete_icon"
-                tools:ignore="ImageContrastCheck" />
-
-            <TextView
-                android:id="@+id/favRowCityName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/favRowDeleteBtn"
-                android:gravity="center"
-                android:padding="4dp"
-                android:text="New York"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/favRowDegree"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/favRowDeleteBtn"
-                android:layout_gravity="center|center_vertical"
-                android:gravity="center|center_vertical"
-                android:padding="4dp"
-                android:text=" 22 °C"
-                android:textColor="#FFFFFF"
-                android:textSize="30dp" />
-
-
-            <TextView
-                android:id="@+id/favRowWeatherDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/favRowDeleteBtn"
-                android:gravity="center"
-                android:paddingStart="30dp"
-                android:paddingTop="5dp"
-                android:text="Clear Sky"
-                android:textColor="#FFFFFF"
-                tools:ignore="RtlSymmetry" />
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -1,12 +1,13 @@
-package com.example.weatheapp
+package com.example.weatheapp.splash
 
 import MyLocation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.weatheapp.intialsetup.IntialSetupFragment
+import com.example.weatheapp.R
 import com.example.weatheapp.mainactivity.MainActivity
-import com.example.weatheapp.utilities.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay

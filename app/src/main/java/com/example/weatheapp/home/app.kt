@@ -22,10 +22,11 @@ class MyApp : Application() {
         }
         if (mySharedPreferences.getWindSpeedPreference() == null)
         {
-            mySharedPreferences.saveTempratureUnitPreference(Constants.metr.toString())
+            mySharedPreferences.saveWindSpeedUnitPreference(Constants.metr.toString())
         }
 
         Log.d("MyApp", "Locale set to ${mySharedPreferences.getTempratureUnitPreference()}")
+        Log.d("MyApp", "Locale set to ${mySharedPreferences.getWindSpeedPreference()}")
     }
 
     private fun changeAppLanguage() {

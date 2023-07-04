@@ -1,6 +1,7 @@
 package com.example.weatheapp.settings.viewmodel
 
 import android.app.Activity
+import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.util.Log
@@ -13,8 +14,8 @@ import java.util.*
 
 class SettingViewModel(val mySharedPreferences: MySharedPreferences) : ViewModel() {
 
-    fun setLanguage(language: String, languageCode: String) {
-        changeAppLanguage(languageCode)
+    fun setLanguage(language: String, languageCode: String,context: Context) {
+        changeAppLanguage(languageCode,context)
         mySharedPreferences.saveLanguagePreference(language)
     }
 
@@ -55,9 +56,15 @@ class SettingViewModel(val mySharedPreferences: MySharedPreferences) : ViewModel
     {
         return mySharedPreferences.getWindSpeedPreference()
     }
-    private fun changeAppLanguage(lan: String) {
-        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(lan)
-        AppCompatDelegate.setApplicationLocales(appLocale)
+    private fun changeAppLanguage(language: String,context:Context) {
+       /* val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(language)
+        AppCompatDelegate.setApplicationLocales(appLocale)*/
+        val locale = Locale(language)
+        val config = context.resources.configuration
+        config.setLocale(locale)
+        context.resources.updateConfiguration(config, context.resources.displayMetrics)
+
     }
+
 }
 
