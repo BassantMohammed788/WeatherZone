@@ -14,9 +14,9 @@ import java.util.*
 
 class SettingViewModel(val mySharedPreferences: MySharedPreferences) : ViewModel() {
 
-    fun setLanguage(language: String, languageCode: String,context: Context) {
-        changeAppLanguage(languageCode,context)
-        mySharedPreferences.saveLanguagePreference(language)
+    fun setLanguage(languageCode: String) {
+       setAppLanguage(languageCode)
+        mySharedPreferences.saveLanguagePreference(languageCode)
     }
 
     fun getLanguage(): String? {
@@ -56,15 +56,9 @@ class SettingViewModel(val mySharedPreferences: MySharedPreferences) : ViewModel
     {
         return mySharedPreferences.getWindSpeedPreference()
     }
-    private fun changeAppLanguage(language: String,context:Context) {
-       /* val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(language)
-        AppCompatDelegate.setApplicationLocales(appLocale)*/
-        val locale = Locale(language)
-        val config = context.resources.configuration
-        config.setLocale(locale)
-        context.resources.updateConfiguration(config, context.resources.displayMetrics)
-
+    fun  setAppLanguage(language:String) {
+        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(language)
+        AppCompatDelegate.setApplicationLocales(appLocale)
     }
 
 }
-

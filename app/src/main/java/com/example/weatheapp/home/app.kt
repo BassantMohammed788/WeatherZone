@@ -1,6 +1,8 @@
 package com.example.weatheapp.home
 
 import android.app.Application
+import android.content.Context
+import android.content.res.Configuration
 import android.preference.PreferenceManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
@@ -10,12 +12,21 @@ import com.example.weatheapp.utilities.Constants
 import java.util.*
 
 class MyApp : Application() {
-
+    lateinit var  mySharedPreferences : MySharedPreferences
     override fun onCreate() {
         super.onCreate()
+        mySharedPreferences = MySharedPreferences.getInstance(this)
+        val language = mySharedPreferences.getLanguagePreference()
+        if (language == null) {
+            mySharedPreferences.saveLanguagePreference(Constants.en.toString())
+            Log.d("MyApp", "First Locale set to $language")
+        }else{
+            Log.d("MyApp", "Locale set to $language")
+        }
 
-        val mySharedPreferences = MySharedPreferences.getInstance(this)
-        changeAppLanguage()
+        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(language)
+        AppCompatDelegate.setApplicationLocales(appLocale)
+
         if (mySharedPreferences.getTempratureUnitPreference() == null)
         {
             mySharedPreferences.saveTempratureUnitPreference(Constants.standard.toString())
@@ -29,15 +40,4 @@ class MyApp : Application() {
         Log.d("MyApp", "Locale set to ${mySharedPreferences.getWindSpeedPreference()}")
     }
 
-    private fun changeAppLanguage() {
-
-        val mySharedPreferences = MySharedPreferences.getInstance(this)
-        val language = mySharedPreferences.getLanguagePreference()
-        if (language == null) {
-            mySharedPreferences.saveLanguagePreference(Constants.en.toString())
-        }
-        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(language)
-        AppCompatDelegate.setApplicationLocales(appLocale)
-      Log.d("MyApp", "Locale set to $language")
-    }
 }

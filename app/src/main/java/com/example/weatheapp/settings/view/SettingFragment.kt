@@ -1,11 +1,18 @@
 package com.example.weatheapp.settings.view
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.weatheapp.MySharedPreferences
@@ -15,6 +22,7 @@ import com.example.weatheapp.settings.viewmodel.SettingViewModel
 import com.example.weatheapp.settings.viewmodel.SettingViewModelFactory
 import com.example.weatheapp.utilities.Constants
 import getLastLocation
+import java.util.*
 
 class SettingFragment : Fragment() {
     private lateinit var binding: FragmentSettingBinding
@@ -65,10 +73,14 @@ class SettingFragment : Fragment() {
         binding.settingLanguageRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 binding.settingLanguageEnglishRadioButton.id -> {
-                    settingViewModel.setLanguage(Constants.en.toString(), "en",requireContext())
+                    settingViewModel.setLanguage(Constants.en.toString())
+
+                    activity?.recreate()
+
                 }
                 binding.settingLanguageArabicRadioButton.id -> {
-                    settingViewModel.setLanguage(Constants.ar.toString(), "ar",requireContext())
+                    settingViewModel.setLanguage(Constants.ar.toString())
+                    activity?.recreate()
                 }
             }
         }
@@ -77,7 +89,6 @@ class SettingFragment : Fragment() {
                 binding.settingLocationGpsRadioButton.id -> {
                     settingViewModel.setLocationMethod(Constants.GPS.toString())
                     getLastLocation(requireContext(),{})
-
                    }
                 binding.settingLocationMapRadioButton.id -> {
                     settingViewModel.setLocationMethod(Constants.MAP.toString())
@@ -132,3 +143,6 @@ class SettingFragment : Fragment() {
     }
 
 }
+
+
+

@@ -34,12 +34,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun attachBaseContext(newBase: Context) {
-        val selectedLanguage = MySharedPreferences.getInstance(this).getLanguagePreference()!!
-        val locale = Locale(selectedLanguage)
-        val config = newBase.resources.configuration
-        config.setLocale(locale)
-        super.attachBaseContext(newBase.createConfigurationContext(config))
-    }
 }
 

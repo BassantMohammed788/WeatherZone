@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.navigation.Navigation
 import com.example.weatheapp.intialsetup.IntialSetupFragment
 import com.example.weatheapp.R
 import com.example.weatheapp.mainactivity.MainActivity
@@ -37,7 +38,9 @@ class SplashActivity : AppCompatActivity() {
                 fragmentTransaction.commit()
             } else {
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+
             }
         }
     }
