@@ -12,14 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
 import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.R
 import com.example.weatheapp.database.ConcreteLocalSource
-import com.example.weatheapp.database.FavWeatherPojo
+import com.example.weatheapp.database.FavWeatherEntity
 import com.example.weatheapp.databinding.FragmentMapsBinding
-import com.example.weatheapp.favourite.view.FavouriteFragment
-import com.example.weatheapp.mainactivity.MainActivity
+import com.example.weatheapp.main.MainActivity
 import com.example.weatheapp.model.Repository
 import com.example.weatheapp.network.ApiClient
 import com.example.weatheapp.utilities.Constants
@@ -70,7 +68,9 @@ class MapsFragment : Fragment() {
                                 Toast.LENGTH_SHORT
                             ).show()
                             val intent = Intent(requireContext(), MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
+
                         }
                         builder.setNegativeButton("${context?.getString(R.string.CancelMapAlert)}") { _, _ -> }
                         val dialog = builder.create()
@@ -103,7 +103,7 @@ class MapsFragment : Fragment() {
                             val lat = latLng.latitude
                             val lng = latLng.longitude
                             lifecycleScope.launch {
-                                repository.insertFavWeather(FavWeatherPojo(lat, lng, city))
+                                repository.insertFavWeather(FavWeatherEntity(lat, lng, city))
                             }
                             Toast.makeText(
                                 requireContext(),

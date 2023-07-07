@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".alert.AlertFragment">
+    tools:context=".alert.view.AlertFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/alertTopBar"
@@ -74,11 +74,10 @@
         android:clickable="true"
         android:contentDescription="@string/todo"
         android:focusable="true"
-        android:src="@drawable/fav_add_icon"
+        android:src="@drawable/add_alertl_notification_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="@color/darkBlue"
-
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView

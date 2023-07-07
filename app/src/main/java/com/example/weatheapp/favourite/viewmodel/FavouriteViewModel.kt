@@ -2,10 +2,9 @@ package com.example.weatheapp.favourite.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatheapp.database.FavWeatherPojo
+import com.example.weatheapp.database.FavWeatherEntity
 import com.example.weatheapp.database.LocalFavState
 import com.example.weatheapp.model.RepositoryInterface
-import com.example.weatheapp.network.ApiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,7 +28,7 @@ class FavouriteViewModel (private val repo: RepositoryInterface): ViewModel() {
         }
     }
 
-    fun deleteFavWeatherFromRoom(favWeather: FavWeatherPojo){
+    fun deleteFavWeatherFromRoom(favWeather: FavWeatherEntity){
         viewModelScope.launch(Dispatchers.IO){
             repo.deleteFavWeather(favWeather)
             getFavWeatherFromRoom()

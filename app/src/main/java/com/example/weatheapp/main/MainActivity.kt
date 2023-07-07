@@ -1,15 +1,12 @@
-package com.example.weatheapp.mainactivity
+package com.example.weatheapp.main
 
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 

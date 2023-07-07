@@ -15,7 +15,7 @@
         android:layout_marginTop="572dp"
         android:backgroundTint="@color/veryLightBlue"
         android:clickable="true"
-        android:src="@drawable/fav_add_icon"
+        android:src="@drawable/add_to_favorites_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="@color/darkBlue"

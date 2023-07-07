@@ -37,14 +37,16 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="alarm">Alarm</string>
-    <string name="from_date_time">From Date/Time</string>
-    <string name="to_date_time">To Date/Time</string>
+    <string name="StartDate">Start Date</string>
+    <string name="ENdDate">End Date</string>
+    <string name="StartTime">Start Time</string>
+    <string name="ENdTime">End Time</string>
     <string name="save">Save</string>
     <string name="notification">Notification</string>
     <string name="weatherzone_alarm">WeatherZone Alarm</string>
     <string name="dismiss">Dismiss</string>
     <string name="alarm_description">Alarm Description</string>
-    <string name="slogan">From rain or shine,                   \t \t \t \t we\'ve got you covered</string>
+    <string name="slogan">From rain or shine,\n\t\t\t\t\t\t\t\t\t\t\t\t\twe\'ve got you covered</string>
     <string name="pressure">Pressure</string>
     <string name="humidity">Humidity</string>
     <string name="cloud">Cloud</string>
@@ -58,6 +60,13 @@
     <string name="visbilitym">m</string>
     <string name="yesMapAlert">Yes</string>
     <string name="CancelMapAlert">Cancel</string>
+
+    <string name="NoInternetconnection">No Internet Connection</string>
+
+    <string name="CheckYourconnection">Check Your Connection</string>
+    <string name="am">Am</string>
+
+    <string name="pm">Pm</string>
     <string name="messageFavMapAlert">Are you sure you want to save </string>
     <string name="errorFavMapAlert"> Could not find location</string>
     <string name="messageHomeMapAlert">Are you sure you want to choose </string>
@@ -69,5 +78,13 @@
 
     <string name="openFavAlertMessage">Can\'t open favourite check your connection first</string>
 
+    <string name="messageDeleteFavAlert">Are you sure you want to delete favourite </string>
+
+    <string name="titleDeleteFavAlert">favourite Deletion </string>
+
+
+    <string name="messageDeleteAlarmAlert">Are you sure you want to delete this alert </string>
+
+    <string name="titleDeleteAlarmAlert">Alert Deletion </string>
 
 </resources>

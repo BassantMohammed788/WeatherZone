@@ -1,15 +1,11 @@
 package com.example.weatheapp.settings.viewmodel
 
-import android.app.Activity
-import android.content.Context
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModel
 import com.example.weatheapp.MySharedPreferences
-import java.util.*
+
 
 
 class SettingViewModel(val mySharedPreferences: MySharedPreferences) : ViewModel() {

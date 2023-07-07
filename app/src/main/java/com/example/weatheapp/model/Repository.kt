@@ -1,12 +1,13 @@
 package com.example.weatheapp.model
 
 import android.util.Log
-import com.example.weatheapp.database.FavWeatherPojo
+import com.example.weatheapp.database.AlertWeatherEntity
+import com.example.weatheapp.database.FavWeatherEntity
 import com.example.weatheapp.database.LocalSource
+import com.example.weatheapp.database.MyResponseEntity
 import com.example.weatheapp.network.RemoteSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import kotlin.math.log
 
 
 class Repository private constructor( var remoteSource: RemoteSource,var localSource: LocalSource) : RepositoryInterface{
@@ -32,17 +33,39 @@ class Repository private constructor( var remoteSource: RemoteSource,var localSo
         return flowOf( remoteSource.getWeatherOverNetwork(lat,lon,units,lang))
     }
 
-    override suspend fun getFavWeather(): Flow<List<FavWeatherPojo>> {
+    override suspend fun getFavWeather(): Flow<List<FavWeatherEntity>> {
         Log.i("TAG", "getFavWeather: ${localSource.getFavWeather()}")
         return flowOf(localSource.getFavWeather())
     }
 
-    override suspend fun insertFavWeather(favWeather: FavWeatherPojo) {
+    override suspend fun insertFavWeather(favWeather: FavWeatherEntity) {
         localSource.insertFavWeather(favWeather)
     }
 
-    override suspend fun deleteFavWeather(favWeather: FavWeatherPojo) {
+    override suspend fun deleteFavWeather(favWeather: FavWeatherEntity) {
         localSource.deleteFavWeather(favWeather)
+    }
+
+    override suspend fun getAlertWeather(): Flow<List<AlertWeatherEntity>> {
+        return flowOf(localSource.getAlertWeather())
+    }
+
+    override suspend fun insertAlertWeather(alertWeather: AlertWeatherEntity) {
+        localSource.insertAlertWeather(alertWeather)
+    }
+
+    override suspend fun deleteAlertWeather(alertWeather: AlertWeatherEntity) {
+       localSource.deleteAlertWeather(alertWeather)
+    }
+
+    override suspend fun getHomeWeather(): Flow<MyResponseEntity> {
+
+        Log.i("TAG", "getWeatherFromRoom:${localSource.getHomeWeather()} ")
+        return flowOf( localSource.getHomeWeather())
+    }
+
+    override suspend fun insertHomeWeather(homeWeather: MyResponseEntity) {
+        localSource.insertHomeWeather(homeWeather)
     }
 }
 

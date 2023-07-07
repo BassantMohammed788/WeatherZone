@@ -2,11 +2,10 @@ package com.example.weatheapp.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
 
 @Entity(tableName = "favourite_table")
-data class FavWeatherPojo(
+data class FavWeatherEntity(
 
     val latt: Double,
     val lng: Double,

@@ -1,5 +1,6 @@
 package com.example.weatheapp.settings.view
 
+import MyLocation
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.os.LocaleListCompat
@@ -18,9 +20,12 @@ import androidx.navigation.Navigation
 import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.R
 import com.example.weatheapp.databinding.FragmentSettingBinding
+import com.example.weatheapp.main.MainActivity
 import com.example.weatheapp.settings.viewmodel.SettingViewModel
 import com.example.weatheapp.settings.viewmodel.SettingViewModelFactory
 import com.example.weatheapp.utilities.Constants
+import com.example.weatheapp.utilities.isConnected
+import com.google.android.material.snackbar.Snackbar
 import getLastLocation
 import java.util.*
 
@@ -88,13 +93,17 @@ class SettingFragment : Fragment() {
             when (checkedId) {
                 binding.settingLocationGpsRadioButton.id -> {
                     settingViewModel.setLocationMethod(Constants.GPS.toString())
-                    getLastLocation(requireContext(),{})
-                   }
+                   // getLastLocation(requireContext(),{})
+                    getLastLocation(requireContext()) { location ->
+                    }}
                 binding.settingLocationMapRadioButton.id -> {
+                    if (isConnected(requireContext())){
                     settingViewModel.setLocationMethod(Constants.MAP.toString())
                     mySharedPreferences.saveMapDestination(Constants.HOME.toString())
                     Navigation.findNavController(view).navigate(R.id.action_menuNavSettingID_to_mapsFragment)
-
+                    }else{
+                        Snackbar.make(view, R.string.CheckYourconnection, Snackbar.LENGTH_LONG).show()
+                    }
                 }
 
             }

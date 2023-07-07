@@ -15,6 +15,7 @@ import com.google.android.gms.location.*
 
 const val PERMISSION_ID = 500
 private val myLocation = MyLocation
+@SuppressLint("StaticFieldLeak")
 private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
 fun checkPermission(context: Context): Boolean {
@@ -49,7 +50,7 @@ private fun isLocationEnabled(context: Context): Boolean {
 fun requestNewLocationData(context: Context, callback: (location: MyLocation?) -> Unit) {
     val locationRequest = LocationRequest()
     locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-    locationRequest.interval = 0
+    locationRequest.interval = 10
 
     fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
     fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
@@ -70,7 +71,7 @@ fun requestNewLocationData(context: Context, callback: (location: MyLocation?) -
                         myLocation.lng =currentLocation.longitude
                         callback(myLocation)
                         // Stop location updates after the current location is obtained
-                        fusedLocationProviderClient.removeLocationUpdates(this)
+                        //fusedLocationProviderClient.removeLocationUpdates(this)
                     }
                 }, Looper.getMainLooper()
             )

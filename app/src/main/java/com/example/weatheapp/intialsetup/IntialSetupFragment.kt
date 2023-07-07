@@ -11,9 +11,11 @@ import android.widget.Toast
 import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.R
 import com.example.weatheapp.databinding.FragmentIntialSetupBinding
-import com.example.weatheapp.mainactivity.MainActivity
+import com.example.weatheapp.main.MainActivity
 import com.example.weatheapp.map.MapsFragment
 import com.example.weatheapp.utilities.Constants
+import com.example.weatheapp.utilities.isConnected
+import com.google.android.material.snackbar.Snackbar
 import getLastLocation
 
 class IntialSetupFragment : Fragment() {
@@ -34,13 +36,18 @@ class IntialSetupFragment : Fragment() {
             val selectedRadioButtonId = binding.intialRadioGroup.checkedRadioButtonId
             when (selectedRadioButtonId) {
                 binding.intialMapRadio.id -> {
-                    mySharedPreferences.saveLocationMethodPreference(Constants.MAP.toString())
-                    mySharedPreferences.saveMapDestination(Constants.HOME.toString())
-                    val fragment = MapsFragment()
-                    val transaction = parentFragmentManager.beginTransaction()
-                    transaction.replace(R.id.intialSetupFragment_container, fragment)
-                    transaction.addToBackStack(null)
-                    transaction.commit()
+                    if (isConnected(requireContext())){
+                        mySharedPreferences.saveLocationMethodPreference(Constants.MAP.toString())
+                        mySharedPreferences.saveMapDestination(Constants.HOME.toString())
+                        val fragment = MapsFragment()
+                        val transaction = parentFragmentManager.beginTransaction()
+                        transaction.replace(R.id.intialSetupFragment_container, fragment)
+                        transaction.addToBackStack(null)
+                        transaction.commit()
+                    }else{
+                        Snackbar.make(view, R.string.CheckYourconnection, Snackbar.LENGTH_LONG).show()
+                    }
+
                 }
                 binding.intialGpsRadio.id -> {
                     mySharedPreferences.saveLocationMethodPreference(Constants.GPS.toString())
@@ -49,12 +56,8 @@ class IntialSetupFragment : Fragment() {
                         binding.gpsProgreesBar.visibility = View.GONE // Hide the progress bar
                         if (location != null) {
                             // Location found, do something with it
-                            Toast.makeText(
-                                requireContext(),
-                                "Latitude: ${location.lat}, Longitude: ${location.lng}",
-                                Toast.LENGTH_SHORT
-                            ).show()
                             val intent = Intent(requireContext(), MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
                         } else {
                             // Location not found

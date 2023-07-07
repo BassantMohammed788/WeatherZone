@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/alertDialogCardView"
+    android:backgroundTint="@android:color/transparent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
-    app:cardCornerRadius="25dp"
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/alertDialogConstraintLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/card_gradient_color"
         android:padding="20dp">
 
@@ -33,37 +32,64 @@
             android:id="@+id/alertDialogToTV"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
+            android:layout_marginEnd="20dp"
             android:background="@color/darkBlue"
             android:gravity="center"
             android:text="@string/to"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@id/alertDialogFromTV"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/alertDialogFromTV" />
 
         <TextView
-            android:id="@+id/alertDialogFromDateTimeTV"
+            android:id="@+id/alertDialogFromDateTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/from_date_time"
+            android:text="@string/StartDate"
             android:textColor="@color/darkBlue"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/alertDialogFromTV"
             app:layout_constraintTop_toBottomOf="@id/alertDialogFromTV" />
 
         <TextView
-            android:id="@+id/alertDialogToDateTimeTV"
+            android:id="@+id/alertDialogFromTimeTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/to_date_time"
+            android:layout_marginTop="5dp"
+            android:text="@string/StartTime"
             android:textColor="@color/darkBlue"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/alertDialogFromDateTimeTV"
+            app:layout_constraintEnd_toEndOf="@+id/alertDialogFromDateTV"
+            app:layout_constraintStart_toStartOf="@+id/alertDialogFromDateTV"
+            app:layout_constraintTop_toBottomOf="@id/alertDialogFromDateTV" />
+
+        <TextView
+            android:id="@+id/alertDialogToDateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ENdDate"
+            android:textColor="@color/darkBlue"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/alertDialogFromDateTV"
             app:layout_constraintEnd_toEndOf="@+id/alertDialogToTV"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/alertDialogToTV"
-            app:layout_constraintTop_toTopOf="@+id/alertDialogFromDateTimeTV"
+            app:layout_constraintTop_toTopOf="@+id/alertDialogFromDateTV"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/alertDialogToTimeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ENdTime"
+            android:textColor="@color/darkBlue"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/alertDialogFromTimeTV"
+            app:layout_constraintEnd_toEndOf="@+id/alertDialogToDateTV"
+            app:layout_constraintStart_toStartOf="@+id/alertDialogToDateTV"
+            app:layout_constraintTop_toTopOf="@+id/alertDialogFromTimeTV"
             tools:ignore="TextContrastCheck" />
 
         <RadioGroup
@@ -73,9 +99,9 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/alertDialogSaveBtn"
-            app:layout_constraintEnd_toEndOf="@+id/alertDialogToDateTimeTV"
-            app:layout_constraintStart_toStartOf="@+id/alertDialogFromDateTimeTV"
-            app:layout_constraintTop_toBottomOf="@+id/alertDialogToDateTimeTV">
+            app:layout_constraintEnd_toEndOf="@+id/alertDialogToTV"
+            app:layout_constraintStart_toStartOf="@+id/alertDialogFromTV"
+            app:layout_constraintTop_toBottomOf="@+id/alertDialogToTimeTV">
 
             <RadioButton
                 android:id="@+id/alertDialogAlarmRadioButton"
@@ -111,9 +137,9 @@
             app:cornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
 
-            app:layout_constraintEnd_toEndOf="@+id/alertDialogRadioGroup"
+            app:layout_constraintEnd_toEndOf="@+id/alertDialogToTV"
             app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="@+id/alertDialogRadioGroup" />
+            app:layout_constraintStart_toStartOf="@+id/alertDialogFromTV" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

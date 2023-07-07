@@ -38,8 +38,10 @@
     <string name="from">من</string>
     <string name="to">الي</string>
     <string name="alarm">تنبيه</string>
-    <string name="from_date_time">من تاريح/وقت</string>
-    <string name="to_date_time">الي تاريح/وقت</string>
+    <string name="StartDate">تاريخ البدء</string>
+    <string name="ENdDate">تاريخ الانتهاء</string>
+    <string name="StartTime">وقت البدء</string>
+    <string name="ENdTime">وقت الانتهاء</string>
     <string name="save">حفظ</string>
     <string name="notification">اشعار</string>
     <string name="weatherzone_alarm">WeatherZone Alarm</string>
@@ -55,6 +57,10 @@
     <string name="metr">متر/ث</string>
     <string name="mile">ميل/س</string>
     <string name="hpa">هب</string>
+
+    <string name="am">ص</string>
+
+    <string name="pm">م</string>
     <string name="visbilitym">م</string>
 
     <string name="yesMapAlert">نعم</string>
@@ -69,4 +75,12 @@
     <string name="addFavAlertMessage"> لا يمكن إضافة المفضلة يرجى التحقق من الاتصال بالإنترنت أولاً</string>
 
     <string name="openFavAlertMessage"> لا يمكن فتح المفضلة يرجى التحقق من الاتصال بالإنترنت أولاً</string>
+    <string name="messageDeleteFavAlert"> هل انت متأكد انك تريد حذف هذه المفضلة</string>
+    <string name="titleDeleteFavAlert">حذف المفضلة </string>
+    <string name="messageDeleteAlarmAlert">هل انت متأكد انك تريد حذف هذا المنبه </string>
+
+    <string name="titleDeleteAlarmAlert">حذف المنبه </string>
+    <string name="NoInternetconnection">لايوجد اتصال بالانترنت</string>
+
+    <string name="CheckYourconnection">تحقق من الاتصال بالانترنت</string>
 </resources>

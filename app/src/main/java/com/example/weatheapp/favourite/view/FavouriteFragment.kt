@@ -15,20 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.database.ConcreteLocalSource
-import com.example.weatheapp.database.FavWeatherPojo
+import com.example.weatheapp.database.FavWeatherEntity
 import com.example.weatheapp.database.LocalFavState
 import com.example.weatheapp.databinding.FragmentFavouriteBinding
 import com.example.weatheapp.favourite.viewmodel.FavouriteViewModel
 import com.example.weatheapp.favourite.viewmodel.FavouriteViewModelFactory
-import com.example.weatheapp.home.view.DailyWeatherAdapter
-import com.example.weatheapp.home.view.HomeFragment
-import com.example.weatheapp.home.viewmodel.HomeViewModel
-import com.example.weatheapp.home.viewmodel.HomeViewModelFactory
-import com.example.weatheapp.map.MapsFragment
 import com.example.weatheapp.model.Repository
 import com.example.weatheapp.network.ApiClient
-import com.example.weatheapp.network.ApiState
-import com.example.weatheapp.settings.viewmodel.SettingViewModelFactory
 import com.example.weatheapp.utilities.Constants
 import com.example.weatheapp.utilities.isConnected
 import kotlinx.coroutines.flow.collectLatest
@@ -120,11 +113,12 @@ class FavouriteFragment : Fragment() {
         }
     }
 
-    private val deleteLambda = { favWeather: FavWeatherPojo ->
-        favouriteViewModel.deleteFavWeatherFromRoom(favWeather)
+    private val deleteLambda = { favWeather: FavWeatherEntity ->
+            favouriteViewModel.deleteFavWeatherFromRoom(favWeather)
+
     }
 
-    private val openFavDetailsLambda = { favWeather: FavWeatherPojo ->
+    private val openFavDetailsLambda = { favWeather: FavWeatherEntity ->
         val currentView = view // capture the view parameter in a local variable
         if (isConnected(requireContext())) {
             mySharedPreferences.saveHomeDestination(Constants.FAVOURITE.toString())
@@ -137,12 +131,10 @@ class FavouriteFragment : Fragment() {
         }
     }
 
-
     fun creatAlert(title: String, message: String) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)
         builder.setMessage(message)
-
         builder.setPositiveButton("${context?.getString(R.string.ok)}") { dialog, which ->
         }
         val alertDialog = builder.create()

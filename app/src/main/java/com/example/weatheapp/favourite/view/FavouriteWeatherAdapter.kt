@@ -1,6 +1,6 @@
 package com.example.weatheapp.favourite.view
 
-import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,22 +9,23 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatheapp.MySharedPreferences
-import com.example.weatheapp.database.FavWeatherPojo
+import com.example.weatheapp.R
+import com.example.weatheapp.database.FavWeatherEntity
 import com.example.weatheapp.databinding.FavouriteRowBinding
 
-class FavouriteDiffUtil : DiffUtil.ItemCallback<FavWeatherPojo>() {
+class FavouriteDiffUtil : DiffUtil.ItemCallback<FavWeatherEntity>() {
 
-    override fun areItemsTheSame(oldItem: FavWeatherPojo, newItem: FavWeatherPojo): Boolean {
+    override fun areItemsTheSame(oldItem: FavWeatherEntity, newItem: FavWeatherEntity): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: FavWeatherPojo, newItem: FavWeatherPojo): Boolean {
+    override fun areContentsTheSame(oldItem: FavWeatherEntity, newItem: FavWeatherEntity): Boolean {
         return oldItem == newItem
     }
 }
 
-class FavouriteWeatherAdapter(private var mySharedPreferences: MySharedPreferences,private var myListener: (FavWeatherPojo) -> Unit,private var deleteListener: (FavWeatherPojo) -> Unit) :
-    ListAdapter<FavWeatherPojo, FavouriteWeatherAdapter.FavouriteViewHolder>(FavouriteDiffUtil()) {
+class FavouriteWeatherAdapter(private var mySharedPreferences: MySharedPreferences, private var myListener: (FavWeatherEntity) -> Unit, private var deleteListener: (FavWeatherEntity) -> Unit) :
+    ListAdapter<FavWeatherEntity, FavouriteWeatherAdapter.FavouriteViewHolder>(FavouriteDiffUtil()) {
     lateinit var context: Context
     lateinit var binding: FavouriteRowBinding
 
@@ -43,7 +44,16 @@ class FavouriteWeatherAdapter(private var mySharedPreferences: MySharedPreferenc
         val currentObject = getItem(position)
         holder.binding.favouriteRowCityTv.text = currentObject.city
         holder.binding.favRowDeleteBtn.setOnClickListener {
-            deleteListener(currentObject)
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("${context?.getString(R.string.titleDeleteFavAlert)}")
+            builder.setMessage("${context?.getString(R.string.messageDeleteFavAlert)}")
+            builder.setPositiveButton("${context?.getString(R.string.yesMapAlert)}") { dialog, which ->
+                deleteListener(currentObject)
+            }
+            builder.setNegativeButton("${context?.getString(R.string.CancelMapAlert)}") { dialog, which ->
+            }
+            val alertDialog = builder.create()
+            alertDialog.show()
         }
         holder.binding.favRowConstrainLayout.setOnClickListener {
             myListener(currentObject)
