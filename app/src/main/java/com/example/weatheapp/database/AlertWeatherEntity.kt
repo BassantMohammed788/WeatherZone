@@ -7,10 +7,8 @@ import androidx.room.PrimaryKey
 data class AlertWeatherEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
-    val alertStartDate: String,
-    var alertEndDate: String,
-    var alertStartTime: String,
-    var alertEndTime: String,
-    var startUnix:Long,
-    var endUnix:Long
+    var startDate:Long,
+    var endDate:Long,
+    var startTime:Long,
+    var endTime:Long
 )

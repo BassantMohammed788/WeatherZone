@@ -2,6 +2,7 @@ package com.example.weatheapp.alert.view
 
 import android.app.AlertDialog
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,6 +12,10 @@ import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.R
 import com.example.weatheapp.database.AlertWeatherEntity
 import com.example.weatheapp.databinding.AlertRowBinding
+import com.example.weatheapp.utilities.getDateStringFromMillis
+import com.example.weatheapp.utilities.getTimeStringFromMillis
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class AlertDiffUtil : DiffUtil.ItemCallback<AlertWeatherEntity>() {
@@ -24,7 +29,7 @@ class AlertDiffUtil : DiffUtil.ItemCallback<AlertWeatherEntity>() {
     }
 }
 
-class AlertWeatherAdapter(private var mySharedPreferences: MySharedPreferences, private var myListener: (AlertWeatherEntity) -> Unit, private var deleteListener: (AlertWeatherEntity) -> Unit) :
+class AlertWeatherAdapter(private var mySharedPreferences: MySharedPreferences, private var deleteListener: (AlertWeatherEntity) -> Unit) :
     ListAdapter<AlertWeatherEntity, AlertWeatherAdapter.AlertViewHolder>(AlertDiffUtil()) {
     lateinit var context: Context
     lateinit var binding: AlertRowBinding
@@ -42,13 +47,18 @@ class AlertWeatherAdapter(private var mySharedPreferences: MySharedPreferences, 
 
     override fun onBindViewHolder(holder: AlertViewHolder, position: Int) {
         val currentObject = getItem(position)
-        holder.binding.alertRowFromDateTv.text = currentObject.alertStartDate
 
-        holder.binding.alertRowToDateTv.text = currentObject.alertEndDate
+        val language=mySharedPreferences.getLanguagePreference()
+        holder.binding.alertRowFromDateTv.text = getDateStringFromMillis(currentObject.startDate,language!!)
 
-        holder.binding.alertRowFromTimeTv.text = currentObject.alertStartTime
+        holder.binding.alertRowToDateTv.text = getDateStringFromMillis(currentObject.endDate,language!!)
 
-        holder.binding.alertRowFromTimeTv.text = currentObject.alertEndTime
+        holder.binding.alertRowFromTimeTv.text = getTimeStringFromMillis(currentObject.startTime,language!!)
+
+        holder.binding.alertRowToTimeTv.text = getTimeStringFromMillis(currentObject.endTime,language!!)
+        Log.i("TAG", "endTIme: ${getTimeStringFromMillis(currentObject.endTime,language!!)}")
+
+        Log.i("TAG", "endTIme: ${getTimeStringFromMillis(currentObject.startTime,language!!)}")
         holder.binding.alertRowDeleteBtn.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setTitle(R.string.titleDeleteAlarmAlert)
@@ -61,9 +71,7 @@ class AlertWeatherAdapter(private var mySharedPreferences: MySharedPreferences, 
             val alertDialog = builder.create()
             alertDialog.show()
         }
-        holder.binding.alertConstraintLayout.setOnClickListener {
-            myListener(currentObject)
-        }
+
 
     }
     override fun getItemCount(): Int {

@@ -64,9 +64,9 @@
     <string name="NoInternetconnection">No Internet Connection</string>
 
     <string name="CheckYourconnection">Check Your Connection</string>
-    <string name="am">Am</string>
+    <string name="am">AM</string>
 
-    <string name="pm">Pm</string>
+    <string name="pm">PM</string>
     <string name="messageFavMapAlert">Are you sure you want to save </string>
     <string name="errorFavMapAlert"> Could not find location</string>
     <string name="messageHomeMapAlert">Are you sure you want to choose </string>

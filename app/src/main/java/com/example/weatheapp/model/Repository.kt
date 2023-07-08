@@ -52,6 +52,7 @@ class Repository private constructor( var remoteSource: RemoteSource,var localSo
 
     override suspend fun insertAlertWeather(alertWeather: AlertWeatherEntity) {
         localSource.insertAlertWeather(alertWeather)
+        Log.i("TAG", "insertAlertWeather: inserted alert")
     }
 
     override suspend fun deleteAlertWeather(alertWeather: AlertWeatherEntity) {

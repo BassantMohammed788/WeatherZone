@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/alert_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,16 +14,14 @@
     app:cardCornerRadius="25dp"
     app:cardElevation="20dp"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/alert_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
-        android:background="@drawable/card_gradient_color">
+        android:background="@drawable/card_gradient_color"
+        android:padding="10dp">
 
 
         <TextView
@@ -29,55 +29,67 @@
             android:id="@+id/alertRowFromDateTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="35dp"
             android:text="@string/from_date"
             android:textColor="@color/darkBlue"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/FromAlertRowTV"
+            app:layout_constraintStart_toStartOf="@+id/FromAlertRowTV"
+            app:layout_constraintTop_toTopOf="@+id/FromAlertRowTV" />
+
+        <TextView
+
+            android:id="@+id/FromAlertRowTV"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@color/darkBlue"
+            android:gravity="center"
+            android:text="@string/from"
+            android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
 
-            android:id="@+id/alertRowToDateTv"
-            android:layout_width="wrap_content"
+            android:id="@+id/fromAlertRowTV"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="@string/to_date"
-            android:textColor="@color/darkBlue"
+            android:layout_marginEnd="68dp"
+            android:background="@color/darkBlue"
+            android:gravity="center"
+            android:text="@string/to"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/alertRowFromDateTv"
-            app:layout_constraintStart_toEndOf="@id/dash"
-            app:layout_constraintTop_toTopOf="@+id/alertRowFromDateTv" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/FromAlertRowTV" />
 
         <TextView
 
-            android:id="@+id/dash"
+            android:id="@+id/alertRowToDateTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:contentDescription="@string/toAlertSpace"
-            android:text="@string/toAlertSpace"
-
-            android:textColor="@color/lightBlue"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="@+id/alertRowFromDateTv"
-            app:layout_constraintStart_toEndOf="@+id/alertRowFromDateTv"
-            app:layout_constraintTop_toTopOf="@+id/alertRowFromDateTv"
-            app:layout_constraintVertical_bias="0.461"
-            tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+            android:text="@string/to_date"
+            android:textColor="@color/darkBlue"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/fromAlertRowTV"
+            app:layout_constraintStart_toStartOf="@+id/fromAlertRowTV"
+            app:layout_constraintTop_toTopOf="@+id/alertRowFromDateTv" />
 
         <ImageView
             android:id="@+id/alertRowDeleteBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/todo"
             android:src="@drawable/fav_delete_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/todo" />
+            app:layout_constraintVertical_bias="0.03" />
 
         <TextView
 
@@ -86,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:text="@string/from_time"
-            android:textColor="@color/lightBlue"
+            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/alertRowFromDateTv"
             app:layout_constraintStart_toStartOf="@+id/alertRowFromDateTv"
@@ -100,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:text="@string/to_time"
-            android:textColor="@color/lightBlue"
+            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/alertRowToDateTv"
             app:layout_constraintStart_toStartOf="@+id/alertRowToDateTv"

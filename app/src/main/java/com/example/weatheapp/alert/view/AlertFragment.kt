@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -13,18 +14,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.R
 import com.example.weatheapp.alert.viewmodel.AlertViewModel
 import com.example.weatheapp.alert.viewmodel.AlertViewModelFactory
-import com.example.weatheapp.database.ConcreteLocalSource
+import com.example.weatheapp.database.*
 import com.example.weatheapp.databinding.AlertDialogBinding
 import com.example.weatheapp.databinding.FragmentAlertBinding
 import com.example.weatheapp.model.Repository
 import com.example.weatheapp.network.ApiClient
+import com.example.weatheapp.utilities.getDateInMillis
+import com.example.weatheapp.utilities.getTimeInMillis
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,18 +49,10 @@ class AlertFragment : Fragment() {
     private var endDateString: String = ""
     private var startTimeString: String = ""
     private var endTimeString: String = ""
-    private var startAmPmString: String = ""
-    private var endAmPmString: String = ""
-    private var startYear: Int = 0
-    private var startMonth: Int = 0
-    private var startDay: Int = 0
-    private var endYear: Int = 0
-    private var endMonth: Int = 0
-    private var endDay: Int = 0
-    private var startHour = 0
-    private var endHour = 0
-    private var startMinute = 0
-    private var endMinute = 0
+    private var startDate: Long = 0
+    private var endDate:Long = 0
+    private var startTime:Long = 0
+    private var endTime:Long = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,11 +81,57 @@ class AlertFragment : Fragment() {
         alertViewModel =
             ViewModelProvider(this, alertiewModelFactory).get(AlertViewModel::class.java)
 
+        alertWeatherAdapter = AlertWeatherAdapter(mySharedPreferences,deleteLambda)
+        recyclerView = binding.alertRecyclerView
+        recyclerView.apply {
+            adapter = alertWeatherAdapter
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        }
 
+        lifecycleScope.launch {
+            alertViewModel.getAlertWeatherFromRoom()
+            alertViewModel.alert.collectLatest { result ->
+                when (result) {
+                    is LocalAlertState.Loading -> {
+                        binding.NoAlertIcon.visibility = View.VISIBLE
+                        binding.noAerttextView.visibility = View.VISIBLE
+                        binding.alertRecyclerView.visibility = View.GONE
+                    }
+                    is LocalAlertState.Success -> {
+                        if (result.alertWeather.isEmpty()) {
+                            binding.NoAlertIcon.visibility = View.VISIBLE
+                            binding.noAerttextView.visibility = View.VISIBLE
+                            binding.alertRecyclerView.visibility = View.GONE
+                        } else {
+                            binding.NoAlertIcon.visibility = View.GONE
+                            binding.noAerttextView.visibility = View.GONE
+                            binding.alertRecyclerView.visibility = View.VISIBLE
+                            alertWeatherAdapter.submitList(result.alertWeather)
+                        }
+                    }
+                    is LocalAlertState.Failure -> {
+                        Log.i("TAG", "onCreate: failed")
+                        Toast.makeText(requireContext(), "failed to load data", Toast.LENGTH_LONG)
+                            .show()
+                    }
+
+                }
+            }
+        }
 
         binding.alertFAB.setOnClickListener {
+            val isPermissionGranted = requestOverlayPermission()
+            if(isPermissionGranted){
             displayAlertDialog()
+            }else{
+                Toast.makeText(requireContext(),"permission must be granted to add alert",Toast.LENGTH_SHORT)
+            }
         }
+    }
+
+    private val deleteLambda = { alert: AlertWeatherEntity ->
+        alertViewModel.deleteALertWeatherFromRoom(alert)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -106,16 +152,20 @@ class AlertFragment : Fragment() {
             showDatePicker("end", toDate, toTime)
         }
         alertDialog.alertDialogSaveBtn.setOnClickListener {
+            val alertEntity=AlertWeatherEntity(startDate = startDate, startTime = startTime, endDate = endDate, endTime = endTime)
+            alertViewModel.insertALertWeatherFromRoom(alertEntity)
+            dialog.dismiss()
+            val fragment = AlertFragment()
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.nav_host, fragment)
+            transaction.commit()
 
-            //askForDrawOverlaysPermission({})
         }
-
 
     }
 
     fun showDatePicker(selectedDateType: String, date: TextView, time: TextView) {
         val calendar = Calendar.getInstance()
-
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
@@ -137,15 +187,13 @@ class AlertFragment : Fragment() {
                 // Save the selected date in the appropriate variables based on the given parameter
                 if (selectedDateType == "start") {
                     startDateString = selectedDateString
-                    startDay = dayOfMonth
-                    startMonth = month
-                    startYear = year
+                    startDate = getDateInMillis(dayOfMonth,month,year)
+
                     date.text = startDateString
                 } else if (selectedDateType == "end") {
                     endDateString = selectedDateString
-                    endDay = dayOfMonth
-                    endMonth = month
-                    endYear = year
+                    endDate = getDateInMillis(dayOfMonth,month,year)
+
                     date.text = endDateString
 
                 }
@@ -189,15 +237,11 @@ class AlertFragment : Fragment() {
                     context?.getString(R.string.am)
                 }"
                 if (selectedTimeType == "start") {
-                    startHour = hourOfDay
-                    startMinute = minute
-                    startAmPmString = amPm
+                    startTime = getTimeInMillis(hourOfDay,minute,amPm)
                     startTimeString = "$selectedTimeString $amPm"
                     time.text = startTimeString
                 } else if (selectedTimeType == "end") {
-                    endHour = hourOfDay
-                    endMinute = minute
-                    endAmPmString=amPm
+                    endTime = getTimeInMillis(hourOfDay,minute,amPm)
                     endTimeString = "$selectedTimeString $amPm"
                     time.text = endTimeString
                 }
@@ -208,49 +252,57 @@ class AlertFragment : Fragment() {
         )
         timePickerDialog.show()
     }
-
-    fun getUnixTimestamp(hour: Int, amPm: String, minute: Int, day: Int, month: Int, year: Int): Long {
-        val calendar = Calendar.getInstance()
-
-        // Set the year, month, and day
-        calendar.set(Calendar.YEAR, year)
-        calendar.set(Calendar.MONTH, month - 1) // Note: month is 0-based (0 = January)
-        calendar.set(Calendar.DAY_OF_MONTH, day)
-
-        // Set the hour and minute
-        val hourOfDay = if (amPm.equals("PM", ignoreCase = true)) {
-            if (hour != 12) hour + 12 else 12
-        } else {
-            if (hour == 12) 0 else hour
-        }
-        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-        calendar.set(Calendar.MINUTE, minute)
-
-        // Set the seconds and milliseconds to 0
-        calendar.set(Calendar.SECOND, 0)
-        calendar.set(Calendar.MILLISECOND, 0)
-
-        // Convert the Calendar instance to a Unix timestamp
-        return calendar.timeInMillis / 1000L
-    }
+    private val REQUEST_OVERLAY_PERMISSION = 1000
+    val packageName= "com.example.weatheapp"
     @RequiresApi(Build.VERSION_CODES.M)
+    fun requestOverlayPermission(): Boolean {
+        if (!Settings.canDrawOverlays(requireContext())) {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Permission Required")
+            builder.setMessage("This app requires the 'Display over other apps' permission to function properly.")
+            builder.setPositiveButton("Grant Permission") { _, _ ->
+                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+                startActivityForResult(intent, REQUEST_OVERLAY_PERMISSION)
+            }
+            builder.setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.setCancelable(false)
+            builder.show()
+            return false
+        } else {
+            // Permission granted, do your work here
+            return true
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 1000) {
+            if (Settings.canDrawOverlays(requireContext())) {
+                // Permission granted, do your work here
+            } else {
+                // Permission not granted
+            }
+        }
+}}
+
+
+/*    @RequiresApi(Build.VERSION_CODES.M)
     fun askForDrawOverlaysPermission(callback: () -> Unit) {
         if (!Settings.canDrawOverlays(requireView().context)) {
             AlertDialog.Builder(requireView().context)
                 .setTitle("Permission Required")
                 .setMessage("This feature requires permission to draw over other apps. Please grant the permission to enable this feature.")
                 .setPositiveButton(R.string.ok) { _, _ ->
-                    val intent = Intent("miui.intent.action.APP_PERM_EDITOR")
-                    intent.setClassName(
-                        "com.miui.securitycenter",
-                        "com.miui.permcenter.permissions.PermissionsEditorActivity"
-                    )
-                    intent.putExtra("extra_pkgname", requireView().context.packageName)
-                   // runtimePermissionResultLauncher.launch(intent)
+                    (!Settings.canDrawOverlays(this)) {
+                        val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+                        startActivityForResult(intent, 1000)
                 }
                 .show()
         } else {
             callback() // Call the callback if the permission is already granted
         }
     }
-}
+}*/
+
