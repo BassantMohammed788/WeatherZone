@@ -11,15 +11,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.R
 import com.example.weatheapp.database.ConcreteLocalSource
 import com.example.weatheapp.database.FavWeatherEntity
 import com.example.weatheapp.databinding.FragmentMapsBinding
+import com.example.weatheapp.favourite.viewmodel.FavouriteViewModel
+import com.example.weatheapp.favourite.viewmodel.FavouriteViewModelFactory
 import com.example.weatheapp.main.MainActivity
-import com.example.weatheapp.model.Repository
-import com.example.weatheapp.network.ApiClient
+import com.example.weatheapp.map.viewmodel.MapViewModel
+import com.example.weatheapp.models.Repository
+import com.example.weatheapp.network.WeatherClient
 import com.example.weatheapp.utilities.Constants
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -39,8 +43,9 @@ class MapsFragment : Fragment() {
     private val location = MyLocation
     private lateinit var mySharedPreferences: MySharedPreferences
     private lateinit var binding: FragmentMapsBinding
-    lateinit var repository: Repository
     lateinit var destination:String
+    lateinit var mapViewModelFactory: MapViewModelFactory
+    lateinit var mapViewModel: MapViewModel
 
     private val callback = OnMapReadyCallback { map ->
         googleMap = map
@@ -103,7 +108,7 @@ class MapsFragment : Fragment() {
                             val lat = latLng.latitude
                             val lng = latLng.longitude
                             lifecycleScope.launch {
-                                repository.insertFavWeather(FavWeatherEntity(lat, lng, city))
+                                mapViewModel.insertFavWeatherIntoRoom(FavWeatherEntity(lat, lng, city))
                             }
                             Toast.makeText(
                                 requireContext(),
@@ -155,15 +160,19 @@ class MapsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mySharedPreferences = MySharedPreferences.getInstance(requireContext())
-        repository = Repository.getInstance(ApiClient.getInstance(), ConcreteLocalSource(requireContext()))
-        destination = mySharedPreferences.getMapDestination()!!
+        destination = mySharedPreferences.getMapDestinationPrefrence()!!
+
+        mapViewModelFactory = MapViewModelFactory(Repository.getInstance(WeatherClient.getInstance(), ConcreteLocalSource(requireContext())))
+
+        mapViewModel =
+            ViewModelProvider(this, mapViewModelFactory).get(MapViewModel::class.java)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (MySharedPreferences.getInstance(requireContext()).getMapDestination() == Constants.FAVOURITE.toString()) {
+        if (MySharedPreferences.getInstance(requireContext()).getMapDestinationPrefrence() == Constants.FAVOURITE.toString()) {
             val navView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavBar)
             navView.visibility = View.VISIBLE
         }

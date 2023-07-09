@@ -26,24 +26,24 @@
 
             <TextView
                 android:id="@+id/hourlyHourTv"
-                android:layout_width="70dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:padding="10dp"
                 android:text="1 AM"
                 android:textColor="@color/darkBlue"
                 android:textSize="12sp" />
 
             <FrameLayout
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:background="@drawable/rounded_dark_background"
-                android:padding="10dp">
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_dark_background">
 
                 <ImageView
                     android:id="@+id/hourlyImage"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/weather_icon" />
@@ -52,10 +52,11 @@
 
             <TextView
                 android:id="@+id/hourlyDegreeTv"
-                android:layout_width="70dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:padding="10dp"
                 android:text="22 °C"
                 android:textColor="@color/darkBlue"
                 android:textSize="12sp" />

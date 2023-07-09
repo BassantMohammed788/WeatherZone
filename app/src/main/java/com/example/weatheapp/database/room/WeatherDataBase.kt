@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.*
 
 @Database(entities = [FavWeatherEntity::class,AlertWeatherEntity::class,MyResponseEntity::class] , version = 1)
-@TypeConverters(Converter::class)
+@TypeConverters(ResponseEntityConverter::class)
 abstract class WeatherDataBase : RoomDatabase() {
     abstract fun getFavouriteWeatherDao(): FavoriteWeatherDAO
     abstract fun getAlertWeatherDao():ALertWeatherDAO

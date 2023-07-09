@@ -1,4 +1,4 @@
-package com.example.weatheapp.model
+package com.example.weatheapp.models
 
 data class MyResponse(
     val lat: Double,

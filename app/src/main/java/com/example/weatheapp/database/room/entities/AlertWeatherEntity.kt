@@ -10,5 +10,6 @@ data class AlertWeatherEntity(
     var startDate:Long,
     var endDate:Long,
     var startTime:Long,
-    var endTime:Long
+    var endTime:Long,
+    var alertType:String
 )

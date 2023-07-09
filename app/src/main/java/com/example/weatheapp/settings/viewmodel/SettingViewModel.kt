@@ -1,6 +1,5 @@
 package com.example.weatheapp.settings.viewmodel
 
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModel
@@ -20,11 +19,11 @@ class SettingViewModel(val mySharedPreferences: MySharedPreferences) : ViewModel
     }
 
     fun setNotificationStatus(status: String) {
-        mySharedPreferences.saveNotificationPreference(status)
+        mySharedPreferences.saveNotificationStatusPreference(status)
     }
 
     fun getNotificationStatus(): String? {
-        return mySharedPreferences.getNotificationPreference()
+        return mySharedPreferences.getNotificationStatusPreference()
     }
 
     fun setLocationMethod(locationMethod: String) {
@@ -35,10 +34,10 @@ class SettingViewModel(val mySharedPreferences: MySharedPreferences) : ViewModel
         return mySharedPreferences.getLocationMethodPreference()
     }
 
+
     fun setTempratureUnit(unit: String)
     {
         mySharedPreferences.saveTempratureUnitPreference(unit)
-        Log.d("temp", "setTempratureUnit: hello from view model")
     }
     fun getTempratureUnit():String?
     {

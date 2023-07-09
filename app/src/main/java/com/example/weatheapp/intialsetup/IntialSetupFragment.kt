@@ -38,7 +38,7 @@ class IntialSetupFragment : Fragment() {
                 binding.intialMapRadio.id -> {
                     if (isConnected(requireContext())){
                         mySharedPreferences.saveLocationMethodPreference(Constants.MAP.toString())
-                        mySharedPreferences.saveMapDestination(Constants.HOME.toString())
+                        mySharedPreferences.saveMapDestinationPrefrence(Constants.HOME.toString())
                         val fragment = MapsFragment()
                         val transaction = parentFragmentManager.beginTransaction()
                         transaction.replace(R.id.intialSetupFragment_container, fragment)

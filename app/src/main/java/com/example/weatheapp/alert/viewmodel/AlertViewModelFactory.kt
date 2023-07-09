@@ -2,8 +2,7 @@ package com.example.weatheapp.alert.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.weatheapp.favourite.viewmodel.FavouriteViewModel
-import com.example.weatheapp.model.RepositoryInterface
+import com.example.weatheapp.models.RepositoryInterface
 
 
 class AlertViewModelFactory(private val repo: RepositoryInterface) : ViewModelProvider.Factory

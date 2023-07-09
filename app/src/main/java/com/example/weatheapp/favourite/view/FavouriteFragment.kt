@@ -20,8 +20,8 @@ import com.example.weatheapp.database.LocalFavState
 import com.example.weatheapp.databinding.FragmentFavouriteBinding
 import com.example.weatheapp.favourite.viewmodel.FavouriteViewModel
 import com.example.weatheapp.favourite.viewmodel.FavouriteViewModelFactory
-import com.example.weatheapp.model.Repository
-import com.example.weatheapp.network.ApiClient
+import com.example.weatheapp.models.Repository
+import com.example.weatheapp.network.WeatherClient
 import com.example.weatheapp.utilities.Constants
 import com.example.weatheapp.utilities.isConnected
 import kotlinx.coroutines.flow.collectLatest
@@ -51,7 +51,7 @@ class FavouriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         faViewModelFactory = FavouriteViewModelFactory(
             Repository.getInstance(
-                ApiClient.getInstance(),
+                WeatherClient.getInstance(),
                 ConcreteLocalSource(requireContext())
             )
         )
@@ -95,13 +95,14 @@ class FavouriteFragment : Fragment() {
                             .show()
                     }
 
+                    else -> {}
                 }
             }
         }
 
         binding.favouriteFAB.setOnClickListener {
             if (isConnected(requireContext())) {
-                mySharedPreferences.saveMapDestination(Constants.FAVOURITE.toString())
+                mySharedPreferences.saveMapDestinationPrefrence(Constants.FAVOURITE.toString())
                 val currentView = view
                 Navigation.findNavController(currentView!!).navigate(R.id.action_menuNavFavID_to_mapsFragment)
 

@@ -36,11 +36,11 @@ class MySharedPreferences private constructor(context: Context) {
         return sharedPreferences.getString(Constants.LOCATION_METHOD.toString(), null)
     }
 
-    fun saveNotificationPreference(status: String) {
+    fun saveNotificationStatusPreference(status: String) {
         sharedPreferences.edit().putString(Constants.NOTIFICATION_STATUS.toString(), status).apply()
     }
 
-    fun getNotificationPreference(): String? {
+    fun getNotificationStatusPreference(): String? {
         return sharedPreferences.getString(Constants.NOTIFICATION_STATUS.toString(), null)
     }
     fun saveTempratureUnitPreference(unit: String) {
@@ -58,12 +58,13 @@ class MySharedPreferences private constructor(context: Context) {
         return sharedPreferences.getString(Constants.WindUnit.toString(), null)
     }
 
-    fun saveMapDestination(destination:String){
+    fun saveMapDestinationPrefrence(destination:String){
         sharedPreferences.edit().putString(Constants.MAP_DESTINATION.toString(),destination).apply()
     }
-    fun getMapDestination():String?{
+    fun getMapDestinationPrefrence():String?{
         return sharedPreferences.getString(Constants.MAP_DESTINATION.toString(),null)
     }
+
     fun saveFavLat(lat:String){
         sharedPreferences.edit().putString(Constants.FAVOURITE_LOCATION_LAT.toString(),lat).apply()
     }

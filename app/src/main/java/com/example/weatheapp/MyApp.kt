@@ -1,15 +1,11 @@
 package com.example.weatheapp.home
 
 import android.app.Application
-import android.content.Context
-import android.content.res.Configuration
-import android.preference.PreferenceManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.utilities.Constants
-import java.util.*
 
 class MyApp : Application() {
     lateinit var  mySharedPreferences : MySharedPreferences

@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -22,17 +21,15 @@ import com.example.weatheapp.database.MyResponseEntity
 import com.example.weatheapp.databinding.FragmentHomeBinding
 import com.example.weatheapp.home.viewmodel.HomeViewModel
 import com.example.weatheapp.home.viewmodel.HomeViewModelFactory
-import com.example.weatheapp.model.Repository
-import com.example.weatheapp.network.ApiClient
+import com.example.weatheapp.models.Repository
+import com.example.weatheapp.network.WeatherClient
 import com.example.weatheapp.network.ApiState
-import com.example.weatheapp.network.RoomState
+import com.example.weatheapp.database.RoomState
 import com.example.weatheapp.utilities.Constants
 import com.example.weatheapp.utilities.isConnected
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import getLastLocation
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -41,7 +38,7 @@ import java.util.*
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
-    val location = MyLocation
+    private val location = MyLocation
     lateinit var homeViewModelFactory: HomeViewModelFactory
     lateinit var homeViewModel: HomeViewModel
     lateinit var dailyWeatherAdapter: DailyWeatherAdapter
@@ -57,13 +54,8 @@ class HomeFragment : Fragment() {
     }
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -94,7 +86,7 @@ class HomeFragment : Fragment() {
 
         homeViewModelFactory = HomeViewModelFactory(
             Repository.getInstance(
-                ApiClient.getInstance(),
+                WeatherClient.getInstance(),
                 ConcreteLocalSource(requireContext())
             )
         )
@@ -204,6 +196,7 @@ class HomeFragment : Fragment() {
                                 hourlyWeatherAdapter.submitList(result.weather.hourly)
 
                         }
+                        else -> {}
                     }
                 }
             }

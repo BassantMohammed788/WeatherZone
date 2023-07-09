@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatheapp.database.FavWeatherEntity
 import com.example.weatheapp.database.LocalFavState
-import com.example.weatheapp.model.RepositoryInterface
+import com.example.weatheapp.models.RepositoryInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

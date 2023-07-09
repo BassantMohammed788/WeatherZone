@@ -81,6 +81,13 @@
 
     <string name="titleDeleteAlarmAlert">حذف المنبه </string>
     <string name="NoInternetconnection">لايوجد اتصال بالانترنت</string>
-
     <string name="CheckYourconnection">تحقق من الاتصال بالانترنت</string>
+    <string name="titleOverlaypermission">إذن مطلوب</string>
+    <string name="messageOverlaypermission">هذا التطبيق يتطلب إذن \'عرض فوق التطبيقات الأخرى\'لاستخدام الاشعارات.</string>
+    <string name="grantPermissionBtn">منح الإذن</string>
+    <string name="permissionrequiredtoaddalert">يجب منح الإذن لإضافة التنبيه</string>
+    <string name="alertStartRequired">يجب إدخال تاريخ ووقت بدء التنبيه</string>
+    <string name="alertEndRequired">يجب إدخال تاريخ ووقت انتهاء التنبيه</string>
+    <string name="alertTypeNotSelected">يجب اختيار نوع التنبيه</string>
+
 </resources>

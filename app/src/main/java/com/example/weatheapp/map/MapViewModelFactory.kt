@@ -1,14 +1,16 @@
-package com.example.weatheapp.favourite.viewmodel
+package com.example.weatheapp.map
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.weatheapp.map.viewmodel.MapViewModel
 import com.example.weatheapp.models.RepositoryInterface
 
-class FavouriteViewModelFactory(private val repo: RepositoryInterface) : ViewModelProvider.Factory
+
+class MapViewModelFactory(private val repo: RepositoryInterface) : ViewModelProvider.Factory
 {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return if (modelClass.isAssignableFrom(FavouriteViewModel::class.java)){
-            FavouriteViewModel(repo) as T
+        return if (modelClass.isAssignableFrom(MapViewModel::class.java)){
+            MapViewModel(repo) as T
         }else{
             throw IllegalArgumentException("ViewModel class not found")
         }

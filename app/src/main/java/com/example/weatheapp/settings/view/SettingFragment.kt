@@ -1,26 +1,16 @@
 package com.example.weatheapp.settings.view
 
-import MyLocation
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.R
 import com.example.weatheapp.databinding.FragmentSettingBinding
-import com.example.weatheapp.main.MainActivity
 import com.example.weatheapp.settings.viewmodel.SettingViewModel
 import com.example.weatheapp.settings.viewmodel.SettingViewModelFactory
 import com.example.weatheapp.utilities.Constants
@@ -99,7 +89,7 @@ class SettingFragment : Fragment() {
                 binding.settingLocationMapRadioButton.id -> {
                     if (isConnected(requireContext())){
                     settingViewModel.setLocationMethod(Constants.MAP.toString())
-                    mySharedPreferences.saveMapDestination(Constants.HOME.toString())
+                    mySharedPreferences.saveMapDestinationPrefrence(Constants.HOME.toString())
                     Navigation.findNavController(view).navigate(R.id.action_menuNavSettingID_to_mapsFragment)
                     }else{
                         Snackbar.make(view, R.string.CheckYourconnection, Snackbar.LENGTH_LONG).show()
@@ -111,13 +101,12 @@ class SettingFragment : Fragment() {
         binding.settingNotificationRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 binding.settingNotificationEnabledRadioButton.id -> {
-                    settingViewModel.setLocationMethod(Constants.ENABLED.toString())
+                    settingViewModel.setNotificationStatus(Constants.ENABLED.toString())
                 }
                 binding.settingNotificationDisableRadioButton.id -> {
-                    settingViewModel.setLocationMethod(Constants.DISABLED.toString())
+                    settingViewModel.setNotificationStatus(Constants.DISABLED.toString())
                 }
             }
-
         }
         binding.settingTembratureRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
@@ -125,7 +114,6 @@ class SettingFragment : Fragment() {
                     settingViewModel.setTempratureUnit(Constants.metric.toString())
                     Log.i("temp", "onViewCreated: "+mySharedPreferences.getTempratureUnitPreference())
                     Log.i("temp", "onViewCreated: helloooo")
-
                 }
                 binding.settingTempratureKelvinRadioButton.id -> {
                     settingViewModel.setTempratureUnit(Constants.standard.toString())
@@ -135,7 +123,6 @@ class SettingFragment : Fragment() {
                     settingViewModel.setTempratureUnit(Constants.imperial.toString())
                     Log.i("temp", "onViewCreated: "+mySharedPreferences.getTempratureUnitPreference())
                 }
-
             }
         }
         binding.settingWindRadioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -143,7 +130,6 @@ class SettingFragment : Fragment() {
                 binding.settingWindMeterRadioButton.id -> {
                     settingViewModel.setWindSpeedUnit(Constants.metr.toString())
                     Log.i("temp", "onViewCreated: "+mySharedPreferences.getWindSpeedPreference())
-
                 }
                 binding.settingWindMileRadioButton.id -> {
                     settingViewModel.setWindSpeedUnit(Constants.mile.toString())
@@ -152,6 +138,3 @@ class SettingFragment : Fragment() {
     }
 
 }
-
-
-

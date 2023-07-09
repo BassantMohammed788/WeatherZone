@@ -1,4 +1,4 @@
-package com.example.weatheapp.model
+package com.example.weatheapp.models
 
 import com.example.weatheapp.database.AlertWeatherEntity
 import com.example.weatheapp.database.FavWeatherEntity

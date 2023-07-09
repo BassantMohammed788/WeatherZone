@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.R
 import com.example.weatheapp.databinding.DailyRowBinding
-import com.example.weatheapp.model.Daily
+import com.example.weatheapp.models.Daily
 import com.example.weatheapp.utilities.Constants
 import java.util.*
 

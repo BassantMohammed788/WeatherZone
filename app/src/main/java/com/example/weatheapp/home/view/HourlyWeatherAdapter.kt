@@ -4,16 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatheapp.MySharedPreferences
-import com.example.weatheapp.databinding.DailyRowBinding
 import com.example.weatheapp.databinding.HourlyRowBinding
-import com.example.weatheapp.model.Daily
-import com.example.weatheapp.model.Hourly
+import com.example.weatheapp.models.Hourly
 import java.text.SimpleDateFormat
 import java.util.*
 

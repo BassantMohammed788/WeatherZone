@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatheapp.database.MyResponseEntity
-import com.example.weatheapp.model.RepositoryInterface
+import com.example.weatheapp.models.RepositoryInterface
 import com.example.weatheapp.network.ApiState
-import com.example.weatheapp.network.RoomState
+import com.example.weatheapp.database.RoomState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,7 +32,6 @@ class HomeViewModel (private val repo: RepositoryInterface): ViewModel() {
             }
         }
     }
-
     fun getWeatherFromRoom(){
         viewModelScope.launch (Dispatchers.IO){
             repo.getHomeWeather().catch { e -> homeMutableStateFlow.value = RoomState.Failure(e) }
@@ -45,14 +44,10 @@ class HomeViewModel (private val repo: RepositoryInterface): ViewModel() {
                 }
                 }
         }
-
     fun insertWeatherIntoRoom(homeWeather:MyResponseEntity){
         viewModelScope.launch(Dispatchers.IO){
             repo.insertHomeWeather(homeWeather)
             Log.i("TAG", "insertWeatherIntoRoom: inserted ")
         }
     }
-
-
-
 }

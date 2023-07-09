@@ -1,7 +1,7 @@
 package com.example.weatheapp.network
 
 import com.example.weatheapp.database.MyResponseEntity
-import com.example.weatheapp.model.MyResponse
+import com.example.weatheapp.models.MyResponse
 
 sealed class ApiState{
     class Success(val weather: MyResponse) : ApiState()
@@ -9,8 +9,3 @@ sealed class ApiState{
     object Loading : ApiState()
 }
 
-sealed class RoomState{
-    class Success(val weather: MyResponseEntity) : RoomState()
-    class Failure(val message: Throwable) : RoomState()
-    object Loading : RoomState()
-}

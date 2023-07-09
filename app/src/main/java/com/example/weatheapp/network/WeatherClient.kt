@@ -1,21 +1,18 @@
 package com.example.weatheapp.network
 
-import com.example.weatheapp.model.MyResponse
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import okhttp3.ResponseBody
+import com.example.weatheapp.models.MyResponse
 
 
-class ApiClient private constructor() : RemoteSource {
+class WeatherClient private constructor() : RemoteSource {
     val apiService: WeatherService by lazy {
         RetrofitHelper.retrofitInstance.create(WeatherService::class.java)
     }
 
     companion object {
-        private var instance: ApiClient? = null
-        fun getInstance(): ApiClient {
+        private var instance: WeatherClient? = null
+        fun getInstance(): WeatherClient {
             return instance ?: synchronized(this) {
-                val temp = ApiClient()
+                val temp = WeatherClient()
                 instance = temp
                 temp
             }

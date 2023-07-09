@@ -86,5 +86,12 @@
     <string name="messageDeleteAlarmAlert">Are you sure you want to delete this alert </string>
 
     <string name="titleDeleteAlarmAlert">Alert Deletion </string>
+    <string name="titleOverlaypermission">Permission Required</string>
+    <string name="messageOverlaypermission">This app requires the \'Display over other apps\' permission to use notification</string>
+    <string name="grantPermissionBtn">Grant Permission</string>
+    <string name="permissionrequiredtoaddalert">Permission must be granted to add alert</string>
+    <string name="alertStartRequired">You must enter an alert start date and time</string>
+    <string name="alertEndRequired">You must enter an alert end date and time</string>
+    <string name="alertTypeNotSelected">You must select an alert type</string>
 
 </resources>
