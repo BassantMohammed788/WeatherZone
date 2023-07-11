@@ -93,5 +93,6 @@
     <string name="alertStartRequired">You must enter an alert start date and time</string>
     <string name="alertEndRequired">You must enter an alert end date and time</string>
     <string name="alertTypeNotSelected">You must select an alert type</string>
+    <string name="weatherFineAlert">Weather is fine, no alerts for the scheduled period</string>
 
 </resources>

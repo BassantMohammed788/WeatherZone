@@ -32,6 +32,7 @@ class HomeViewModel (private val repo: RepositoryInterface): ViewModel() {
             }
         }
     }
+
     fun getWeatherFromRoom(){
         viewModelScope.launch (Dispatchers.IO){
             repo.getHomeWeather().catch { e -> homeMutableStateFlow.value = RoomState.Failure(e) }

@@ -78,9 +78,9 @@ class MySharedPreferences private constructor(context: Context) {
         return sharedPreferences.getString(Constants.FAVOURITE_LOCATION_LNG.toString(),null)
     }
     fun saveHomeDestination(destination:String){
-        sharedPreferences.edit().putString(Constants.HOMEDESTINATION.toString(),destination).apply()
+        sharedPreferences.edit().putString(Constants.HOME_DESTINATION.toString(),destination).apply()
     }
     fun getHomeDestination():String?{
-        return sharedPreferences.getString(Constants.HOMEDESTINATION.toString(),null)
+        return sharedPreferences.getString(Constants.HOME_DESTINATION.toString(),null)
     }
 }

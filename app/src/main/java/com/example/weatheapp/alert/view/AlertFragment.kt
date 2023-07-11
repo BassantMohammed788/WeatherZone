@@ -17,8 +17,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.R
+import com.example.weatheapp.alert.AlertWorker
 import com.example.weatheapp.alert.viewmodel.AlertViewModel
 import com.example.weatheapp.alert.viewmodel.AlertViewModelFactory
 import com.example.weatheapp.database.*
@@ -27,10 +32,12 @@ import com.example.weatheapp.databinding.FragmentAlertBinding
 import com.example.weatheapp.models.Repository
 import com.example.weatheapp.network.WeatherClient
 import com.example.weatheapp.utilities.*
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 class AlertFragment : Fragment() {
@@ -49,6 +56,7 @@ class AlertFragment : Fragment() {
     private var startTime:Long = 0
     private var endTime:Long = 0
     private var alarmOrNotification : String = ""
+    private var description = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +72,7 @@ class AlertFragment : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         alertiewModelFactory = AlertViewModelFactory(
@@ -180,14 +188,64 @@ class AlertFragment : Fragment() {
             } else {
                 val alertEntity = AlertWeatherEntity(startDate = startDate, startTime = startTime, endDate = endDate, endTime = endTime, alertType = alarmOrNotification)
                 alertViewModel.insertALertWeatherFromRoom(alertEntity)
-                dialog.dismiss()
-                val fragment = AlertFragment()
-                val transaction = parentFragmentManager.beginTransaction()
-                transaction.replace(R.id.nav_host, fragment)
-                transaction.commit()
+
+                val gson = Gson()
+                val alertJsonString = gson.toJson(alertEntity)
+                Log.i("TAG", "jsonString: $alertJsonString")
+
+                lifecycleScope.launch {
+                        alertViewModel.getWeatherFromRoom()
+                        alertViewModel.homeWeather.collectLatest { result ->
+                            when (result) {
+                                is RoomState.Success -> {
+                                    Log.i("TAG", "displayAlertDialog: ${alertEntity.id}")
+                                    var data = result.weather.alert
+                                    if (data != null) {
+                                        if (data.isEmpty()) {
+                                            description = "Weather is fine"
+                                        } else {
+                                            description = data[0].tags[0]
+                                        }
+                                    }else{
+                                        description = "Weather is fine"
+                                    }
+                                    val currentDateTimeInMillis = System.currentTimeMillis()
+                                    val delay = startTime-currentDateTimeInMillis
+
+                                    Log.i("TAG", "start: ${formatDate(startTime)} ")
+
+                                    Log.i("TAG", "end: ${formatDate(endTime)} ")
+                                    Log.i("TAG", "current: ${formatDate(currentDateTimeInMillis)} ")
+
+
+                                    val inputData = Data.Builder()
+                                        .putString(Constants.ALERT_JSON_STRING.toString(),alertJsonString).build()
+
+                                    val myRequest: WorkRequest =
+                                        OneTimeWorkRequestBuilder<AlertWorker>()
+                                            .setInputData(inputData)
+                                            .setInitialDelay(delay,TimeUnit.MILLISECONDS)
+                                            .addTag(alertEntity.id)
+                                            .build()
+
+
+                                    Log.i("TAG", "displayAlertDialog: request")
+                                    WorkManager.getInstance(requireContext())
+                                        .enqueue(myRequest)
+                                    Log.i("TAG", "displayAlertDialog: enqueue")
+
+                                    dialog.dismiss()
+                                    val fragment = AlertFragment()
+                                    val transaction = parentFragmentManager.beginTransaction()
+                                    transaction.replace(R.id.nav_host, fragment)
+                                    transaction.commit()
+                                }
+                                else -> {}
+                            }
+                        }
+                }
             }
         }
-
     }
 
     fun showDatePicker(selectedDateType: String, date: TextView, time: TextView) {
@@ -244,11 +302,11 @@ class AlertFragment : Fragment() {
 
                 if (selectedTimeType == "start") {
                     startTime = getTimeInMillis(hourOfDay,minute)
-                    startTimeString = "$selectedTimeString"
+                    startTimeString = selectedTimeString
                     time.text = startTimeString
                 } else if (selectedTimeType == "end") {
                     endTime = getTimeInMillis(hourOfDay,minute)
-                    endTimeString = "$selectedTimeString"
+                    endTimeString = selectedTimeString
                     time.text = endTimeString
                 }
             },
@@ -259,4 +317,3 @@ class AlertFragment : Fragment() {
         timePickerDialog.show()
     }
 }
-

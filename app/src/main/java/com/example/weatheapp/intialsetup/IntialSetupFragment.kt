@@ -12,7 +12,7 @@ import com.example.weatheapp.MySharedPreferences
 import com.example.weatheapp.R
 import com.example.weatheapp.databinding.FragmentIntialSetupBinding
 import com.example.weatheapp.main.MainActivity
-import com.example.weatheapp.map.MapsFragment
+import com.example.weatheapp.map.view.MapsFragment
 import com.example.weatheapp.utilities.Constants
 import com.example.weatheapp.utilities.isConnected
 import com.google.android.material.snackbar.Snackbar

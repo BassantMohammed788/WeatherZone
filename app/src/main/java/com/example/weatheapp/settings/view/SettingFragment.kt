@@ -84,7 +84,7 @@ class SettingFragment : Fragment() {
                 binding.settingLocationGpsRadioButton.id -> {
                     settingViewModel.setLocationMethod(Constants.GPS.toString())
                    // getLastLocation(requireContext(),{})
-                    getLastLocation(requireContext()) { location ->
+                    getLastLocation(requireContext()) { _ ->
                     }}
                 binding.settingLocationMapRadioButton.id -> {
                     if (isConnected(requireContext())){

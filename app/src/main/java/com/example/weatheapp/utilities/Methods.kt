@@ -87,3 +87,8 @@ fun requestOverlayPermission(fragment: Fragment): Boolean {
         return true
     }
 }
+fun formatDate(timeInMillis: Long): String? {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    val date = Date(timeInMillis)
+    return dateFormat.format(date)
+}

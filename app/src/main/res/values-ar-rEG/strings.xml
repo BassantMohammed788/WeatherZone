@@ -89,5 +89,5 @@
     <string name="alertStartRequired">يجب إدخال تاريخ ووقت بدء التنبيه</string>
     <string name="alertEndRequired">يجب إدخال تاريخ ووقت انتهاء التنبيه</string>
     <string name="alertTypeNotSelected">يجب اختيار نوع التنبيه</string>
-
+    <string name="weatherFineAlert">الطقس جيد، لا يوجد تنبيهات للفترة المحددة</string>
 </resources>

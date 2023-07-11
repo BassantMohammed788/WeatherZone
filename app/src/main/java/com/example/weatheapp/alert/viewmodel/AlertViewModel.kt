@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatheapp.database.AlertWeatherEntity
 import com.example.weatheapp.database.LocalAlertState
+import com.example.weatheapp.database.RoomState
 import com.example.weatheapp.models.RepositoryInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,6 +37,21 @@ class AlertViewModel (private val repo: RepositoryInterface): ViewModel() {
     fun insertALertWeatherFromRoom(alertWeather: AlertWeatherEntity){
         viewModelScope.launch(Dispatchers.IO){
             repo.insertAlertWeather(alertWeather)
+        }
+    }
+    private val homeMutableStateFlow : MutableStateFlow<RoomState> = MutableStateFlow (RoomState.Loading)
+
+    val homeWeather: StateFlow<RoomState> = homeMutableStateFlow
+    fun getWeatherFromRoom(){
+        viewModelScope.launch (Dispatchers.IO){
+            repo.getHomeWeather().catch { e -> homeMutableStateFlow.value = RoomState.Failure(e) }
+                .collect{ data ->
+                    if (data != null){
+                        homeMutableStateFlow.value =  RoomState.Success(data)
+                    }else {
+                        homeMutableStateFlow.value =  RoomState.Failure(Throwable())
+                    }
+                }
         }
     }
 

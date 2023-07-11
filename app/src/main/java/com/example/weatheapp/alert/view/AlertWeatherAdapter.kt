@@ -56,22 +56,18 @@ class AlertWeatherAdapter(private var mySharedPreferences: MySharedPreferences, 
         holder.binding.alertRowFromTimeTv.text = getTimeStringFromMillis(currentObject.startTime,language!!)
 
         holder.binding.alertRowToTimeTv.text = getTimeStringFromMillis(currentObject.endTime,language!!)
-        Log.i("TAG", "endTIme: ${getTimeStringFromMillis(currentObject.endTime,language!!)}")
-
-        Log.i("TAG", "endTIme: ${getTimeStringFromMillis(currentObject.startTime,language!!)}")
         holder.binding.alertRowDeleteBtn.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setTitle(R.string.titleDeleteAlarmAlert)
             builder.setMessage(R.string.messageDeleteAlarmAlert)
-            builder.setPositiveButton(R.string.yesMapAlert) { dialog, which ->
+            builder.setPositiveButton(R.string.yesMapAlert) { _, _ ->
                 deleteListener(currentObject)
             }
-            builder.setNegativeButton(R.string.CancelMapAlert){ dialog, which ->
+            builder.setNegativeButton(R.string.CancelMapAlert){ _, _ ->
             }
             val alertDialog = builder.create()
             alertDialog.show()
         }
-
 
     }
     override fun getItemCount(): Int {

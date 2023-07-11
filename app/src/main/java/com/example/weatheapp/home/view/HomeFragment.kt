@@ -143,10 +143,7 @@ class HomeFragment : Fragment() {
                                 result.weather.current.weather[0].icon,
                                 requireContext()
                             )
-                            Log.i(
-                                "resu",
-                                "onViewCreated: ${result.weather.current.weather[0].icon}"
-                            )
+                            Log.i("resu", "onViewCreated: ${result.weather.current.weather[0].icon}")
                             binding.homeWeatherIcon.setImageResource(drawableResId)
                             dailyWeatherAdapter.submitList(result.weather.daily)
                             hourlyWeatherAdapter.submitList(result.weather.hourly)
