@@ -43,12 +43,16 @@ class ConcreteLocalSource (context: Context) : LocalSource {
         alertWeatherDAO.deleteAlertWeather(alertWeather)
     }
 
-    override suspend fun getHomeWeather(): MyResponseEntity {
-        return homeWeatherDAO.getHomeWeather()
-    }
 
     override suspend fun insertHomeWeather(homeWeather: MyResponseEntity) {
         homeWeatherDAO.insertHomeWeather(homeWeather)
+    }
+
+    override suspend fun getSavedWeather(
+        type: String,
+        id: String
+    ): MyResponseEntity {
+        return homeWeatherDAO.getSavedWeather(type, id)
     }
 
 

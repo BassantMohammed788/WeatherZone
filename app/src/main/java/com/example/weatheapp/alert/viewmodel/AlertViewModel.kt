@@ -42,9 +42,9 @@ class AlertViewModel (private val repo: RepositoryInterface): ViewModel() {
     private val homeMutableStateFlow : MutableStateFlow<RoomState> = MutableStateFlow (RoomState.Loading)
 
     val homeWeather: StateFlow<RoomState> = homeMutableStateFlow
-    fun getWeatherFromRoom(){
+    fun getWeatherFromRoom(type:String,id:String){
         viewModelScope.launch (Dispatchers.IO){
-            repo.getHomeWeather().catch { e -> homeMutableStateFlow.value = RoomState.Failure(e) }
+            repo.getSavedWeather(type,id).catch { e -> homeMutableStateFlow.value = RoomState.Failure(e) }
                 .collect{ data ->
                     if (data != null){
                         homeMutableStateFlow.value =  RoomState.Success(data)

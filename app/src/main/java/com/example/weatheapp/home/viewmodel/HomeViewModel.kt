@@ -33,9 +33,9 @@ class HomeViewModel (private val repo: RepositoryInterface): ViewModel() {
         }
     }
 
-    fun getWeatherFromRoom(){
+    fun getWeatherFromRoom(type:String,id:String){
         viewModelScope.launch (Dispatchers.IO){
-            repo.getHomeWeather().catch { e -> homeMutableStateFlow.value = RoomState.Failure(e) }
+            repo.getSavedWeather(type,id).catch { e -> homeMutableStateFlow.value = RoomState.Failure(e) }
                 .collect{ data ->
                     if (data != null){
                         homeMutableStateFlow.value =  RoomState.Success(data)
@@ -49,6 +49,8 @@ class HomeViewModel (private val repo: RepositoryInterface): ViewModel() {
         viewModelScope.launch(Dispatchers.IO){
             repo.insertHomeWeather(homeWeather)
             Log.i("TAG", "insertWeatherIntoRoom: inserted ")
+            Log.i("TAG", "pojo that inserted: $homeWeather ")
+
         }
     }
 }

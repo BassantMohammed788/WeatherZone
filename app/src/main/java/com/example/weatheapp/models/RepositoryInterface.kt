@@ -15,6 +15,7 @@ interface RepositoryInterface {
     suspend fun insertAlertWeather(alertWeather: AlertWeatherEntity)
     suspend fun deleteAlertWeather(alertWeather: AlertWeatherEntity)
 
-    suspend fun  getHomeWeather(): Flow<MyResponseEntity>
     suspend fun insertHomeWeather(homeWeather: MyResponseEntity)
+    suspend fun getSavedWeather(type: String, id: String):  Flow<MyResponseEntity>
+
 }

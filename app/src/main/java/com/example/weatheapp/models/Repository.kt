@@ -59,14 +59,16 @@ class Repository private constructor( var remoteSource: RemoteSource,var localSo
        localSource.deleteAlertWeather(alertWeather)
     }
 
-    override suspend fun getHomeWeather(): Flow<MyResponseEntity> {
-
-        Log.i("TAG", "getWeatherFromRoom:${localSource.getHomeWeather()} ")
-        return flowOf( localSource.getHomeWeather())
-    }
 
     override suspend fun insertHomeWeather(homeWeather: MyResponseEntity) {
         localSource.insertHomeWeather(homeWeather)
+    }
+
+    override suspend fun getSavedWeather(
+        type: String,
+        id: String
+    ): Flow<MyResponseEntity> {
+        return flowOf( localSource.getSavedWeather(type,id))
     }
 }
 

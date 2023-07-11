@@ -10,6 +10,7 @@ interface LocalSource {
     suspend fun  getAlertWeather(): List<AlertWeatherEntity>
     suspend fun insertAlertWeather(alertWeather:AlertWeatherEntity)
     suspend fun deleteAlertWeather(alertWeather:AlertWeatherEntity)
-    suspend fun  getHomeWeather(): MyResponseEntity
     suspend fun insertHomeWeather(homeWeather:MyResponseEntity)
+    suspend fun getSavedWeather(type: String, id: String):  MyResponseEntity
+
 }

@@ -1,5 +1,6 @@
 package com.example.weatheapp.alert
 
+import MyLocation
 import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -40,6 +41,7 @@ class AlertWorker(appContext: Context, params: WorkerParameters) :
     private var alertTag = ""
     private var start :Long = 0
     private var end :Long = 0
+    private var location = MyLocation
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -49,7 +51,7 @@ class AlertWorker(appContext: Context, params: WorkerParameters) :
         var description = ""
 
         try {
-            alertViewModel.getWeatherFromRoom()
+            alertViewModel.getWeatherFromRoom("home","1")
             alertViewModel.homeWeather.collectLatest { result ->
                 when (result) {
                     is RoomState.Success -> {
@@ -60,7 +62,7 @@ class AlertWorker(appContext: Context, params: WorkerParameters) :
                                     applicationContext.getString(R.string.weatherFineAlert)
                                 Log.i("TAG", "description: $description")
                             } else {
-                                description = data[1].tags[1]
+                                description = data[0].description
                                 Log.i("TAG", "description: $description")
                             }
                         } else {
@@ -96,12 +98,12 @@ class AlertWorker(appContext: Context, params: WorkerParameters) :
                         }
                         res = Result.success()
                     }
-                    else -> {}
+                    else -> {
+                        
+                    }
                 }
             }
-
-            val worker = WorkManager.getInstance(applicationContext)
-            worker.cancelAllWorkByTag("alertTag")
+            
         }catch (e:CancellationException){
             e.printStackTrace()
             res= Result.failure()

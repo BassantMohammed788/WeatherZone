@@ -57,6 +57,7 @@ class AlertFragment : Fragment() {
     private var endTime:Long = 0
     private var alarmOrNotification : String = ""
     private var description = ""
+    private var isWorkRequestEnqueued = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,6 +135,8 @@ class AlertFragment : Fragment() {
     }
 
     private val deleteLambda = { alert: AlertWeatherEntity ->
+        val worker = WorkManager.getInstance(requireContext())
+        worker.cancelAllWorkByTag(alert.id)
         alertViewModel.deleteALertWeatherFromRoom(alert)
 
     }
@@ -193,7 +196,7 @@ class AlertFragment : Fragment() {
                 val alertJsonString = gson.toJson(alertEntity)
                 Log.i("TAG", "jsonString: $alertJsonString")
 
-                lifecycleScope.launch {
+               /* lifecycleScope.launch {
                         alertViewModel.getWeatherFromRoom()
                         alertViewModel.homeWeather.collectLatest { result ->
                             when (result) {
@@ -217,23 +220,27 @@ class AlertFragment : Fragment() {
                                     Log.i("TAG", "end: ${formatDate(endTime)} ")
                                     Log.i("TAG", "current: ${formatDate(currentDateTimeInMillis)} ")
 
+                                    if (!isWorkRequestEnqueued) {
+                                        val inputData = Data.Builder()
+                                            .putString(
+                                                Constants.ALERT_JSON_STRING.toString(),
+                                                alertJsonString
+                                            ).build()
 
-                                    val inputData = Data.Builder()
-                                        .putString(Constants.ALERT_JSON_STRING.toString(),alertJsonString).build()
-
-                                    val myRequest: WorkRequest =
-                                        OneTimeWorkRequestBuilder<AlertWorker>()
-                                            .setInputData(inputData)
-                                            .setInitialDelay(delay,TimeUnit.MILLISECONDS)
-                                            .addTag(alertEntity.id)
-                                            .build()
+                                        val myRequest: WorkRequest =
+                                            OneTimeWorkRequestBuilder<AlertWorker>()
+                                                .setInputData(inputData)
+                                                .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+                                                .addTag(alertEntity.id)
+                                                .build()
 
 
-                                    Log.i("TAG", "displayAlertDialog: request")
-                                    WorkManager.getInstance(requireContext())
-                                        .enqueue(myRequest)
-                                    Log.i("TAG", "displayAlertDialog: enqueue")
-
+                                        Log.i("TAG", "displayAlertDialog: request")
+                                        WorkManager.getInstance(requireContext())
+                                            .enqueue(myRequest)
+                                        Log.i("TAG", "displayAlertDialog: enqueue")
+                                        isWorkRequestEnqueued = true
+                                    }
                                     dialog.dismiss()
                                     val fragment = AlertFragment()
                                     val transaction = parentFragmentManager.beginTransaction()
@@ -243,7 +250,41 @@ class AlertFragment : Fragment() {
                                 else -> {}
                             }
                         }
+                }*/
+                val currentDateTimeInMillis = System.currentTimeMillis()
+                val delay = startTime-currentDateTimeInMillis
+
+                Log.i("TAG", "start: ${formatDate(startTime)} ")
+
+                Log.i("TAG", "end: ${formatDate(endTime)} ")
+                Log.i("TAG", "current: ${formatDate(currentDateTimeInMillis)} ")
+
+                if (!isWorkRequestEnqueued) {
+                    val inputData = Data.Builder()
+                        .putString(
+                            Constants.ALERT_JSON_STRING.toString(),
+                            alertJsonString
+                        ).build()
+
+                    val myRequest: WorkRequest =
+                        OneTimeWorkRequestBuilder<AlertWorker>()
+                            .setInputData(inputData)
+                            .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+                            .addTag(alertEntity.id)
+                            .build()
+
+
+                    Log.i("TAG", "displayAlertDialog: request")
+                    WorkManager.getInstance(requireContext())
+                        .enqueue(myRequest)
+                    Log.i("TAG", "displayAlertDialog: enqueue")
+                    isWorkRequestEnqueued = true
                 }
+                dialog.dismiss()
+                val fragment = AlertFragment()
+                val transaction = parentFragmentManager.beginTransaction()
+                transaction.replace(R.id.nav_host, fragment)
+                transaction.commit()
             }
         }
     }

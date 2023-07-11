@@ -7,13 +7,17 @@ import com.google.gson.reflect.TypeToken
 
 @Entity(tableName = "home_table")
 data class MyResponseEntity(
-    @PrimaryKey val id: Int = 1,
+
+
     val countryName: String?,
     var lat: Double, var lon: Double,
     var current: Current?,
     var hourly: List<Hourly>?,
     var daily: List<Daily>?,
-    var alert: List<Alert>?
+    var alert: List<Alert>?,
+    var type:String,
+    @PrimaryKey
+    val id: String = lat.toString()+lon.toString()
 ) {
 
 }
