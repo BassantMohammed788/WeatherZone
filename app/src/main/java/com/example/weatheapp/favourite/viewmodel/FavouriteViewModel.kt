@@ -18,6 +18,7 @@ class FavouriteViewModel (private val repo: RepositoryInterface): ViewModel() {
 
     val weather: StateFlow<LocalFavState> = mutableStateFlow
 
+
     fun getFavWeatherFromRoom() {
         viewModelScope.launch(Dispatchers.IO){
              repo.getFavWeather().catch {
@@ -28,6 +29,11 @@ class FavouriteViewModel (private val repo: RepositoryInterface): ViewModel() {
         }
     }
 
+    fun insertFavWeatherIntoRoom(favWeather: FavWeatherEntity){
+        viewModelScope.launch(Dispatchers.IO){
+            repo.insertFavWeather(favWeather)
+        }
+    }
     fun deleteFavWeatherFromRoom(favWeather: FavWeatherEntity){
         viewModelScope.launch(Dispatchers.IO){
             repo.deleteFavWeather(favWeather)

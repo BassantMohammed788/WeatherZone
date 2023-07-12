@@ -46,7 +46,8 @@ class FakeRepository(var myRemoteResponse:MyResponse,
     }
 
     override suspend fun insertHomeWeather(homeWeather: MyResponseEntity) {
-       myResponseLocalList.add(homeWeather)
+        myResponseLocalList.clear()
+        myResponseLocalList.add(homeWeather)
     }
 
     override suspend fun getSavedWeather(type: String, id: String): Flow<MyResponseEntity> {

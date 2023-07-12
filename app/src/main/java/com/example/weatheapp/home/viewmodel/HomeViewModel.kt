@@ -45,12 +45,11 @@ class HomeViewModel (private val repo: RepositoryInterface): ViewModel() {
                 }
                 }
         }
+
     fun insertWeatherIntoRoom(homeWeather:MyResponseEntity){
         viewModelScope.launch(Dispatchers.IO){
             repo.insertHomeWeather(homeWeather)
             Log.i("TAG", "insertWeatherIntoRoom: inserted ")
-            Log.i("TAG", "pojo that inserted: $homeWeather ")
-
         }
     }
 }

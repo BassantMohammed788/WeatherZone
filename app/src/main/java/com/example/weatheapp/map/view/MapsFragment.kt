@@ -18,6 +18,8 @@ import com.example.weatheapp.R
 import com.example.weatheapp.database.ConcreteLocalSource
 import com.example.weatheapp.database.FavWeatherEntity
 import com.example.weatheapp.databinding.FragmentMapsBinding
+import com.example.weatheapp.favourite.viewmodel.FavouriteViewModel
+import com.example.weatheapp.favourite.viewmodel.FavouriteViewModelFactory
 import com.example.weatheapp.main.MainActivity
 import com.example.weatheapp.map.viewmodel.MapViewModel
 import com.example.weatheapp.map.viewmodel.MapViewModelFactory
@@ -43,8 +45,9 @@ class MapsFragment : Fragment() {
     private lateinit var mySharedPreferences: MySharedPreferences
     private lateinit var binding: FragmentMapsBinding
     lateinit var destination:String
-    lateinit var mapViewModelFactory: MapViewModelFactory
-    lateinit var mapViewModel: MapViewModel
+
+    lateinit var favouriteViewModel: FavouriteViewModel
+    lateinit var faViewModelFactory: FavouriteViewModelFactory
 
     private val callback = OnMapReadyCallback { map ->
         googleMap = map
@@ -107,7 +110,7 @@ class MapsFragment : Fragment() {
                             val lat = latLng.latitude
                             val lng = latLng.longitude
                             lifecycleScope.launch {
-                                mapViewModel.insertFavWeatherIntoRoom(FavWeatherEntity(lat, lng, city))
+                                favouriteViewModel.insertFavWeatherIntoRoom(FavWeatherEntity(lat, lng, city))
                             }
                             Toast.makeText(
                                 requireContext(),
@@ -158,12 +161,16 @@ class MapsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mySharedPreferences = MySharedPreferences.getInstance(requireContext())
         destination = mySharedPreferences.getMapDestinationPrefrence()!!
+        faViewModelFactory = FavouriteViewModelFactory(
+            Repository.getInstance(
+                WeatherClient.getInstance(),
+                ConcreteLocalSource(requireContext())
+            )
+        )
+        favouriteViewModel =
+            ViewModelProvider(this, faViewModelFactory).get(FavouriteViewModel::class.java)
 
-        mapViewModelFactory = MapViewModelFactory(Repository.getInstance(WeatherClient.getInstance(), ConcreteLocalSource(requireContext())))
-
-        mapViewModel =
-            ViewModelProvider(this, mapViewModelFactory).get(MapViewModel::class.java)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
 

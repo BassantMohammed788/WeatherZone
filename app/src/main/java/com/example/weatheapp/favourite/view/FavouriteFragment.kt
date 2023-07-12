@@ -121,15 +121,15 @@ class FavouriteFragment : Fragment() {
 
     private val openFavDetailsLambda = { favWeather: FavWeatherEntity ->
         val currentView = view // capture the view parameter in a local variable
-        if (isConnected(requireContext())) {
+      //  if (isConnected(requireContext())) {
             mySharedPreferences.saveHomeDestination(Constants.FAVOURITE.toString())
             Navigation.findNavController(currentView!!).navigate(R.id.action_menuNavFavID_to_menuNavHomeID)
 
-        } else {
+   /*     } else {
             val title = "${context?.getString(R.string.addFavAlertTitle)}"
             val message = "${context?.getString(R.string.openFavAlertMessage)}"
             creatAlert(title, message)
-        }
+        }*/
     }
 
     fun creatAlert(title: String, message: String) {

@@ -357,4 +357,9 @@ class AlertFragment : Fragment() {
         )
         timePickerDialog.show()
     }
+
+    override fun onResume() {
+        super.onResume()
+        alertViewModel.getAlertWeatherFromRoom()
+    }
 }

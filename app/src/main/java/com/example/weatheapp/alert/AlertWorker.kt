@@ -41,17 +41,62 @@ class AlertWorker(appContext: Context, params: WorkerParameters) :
     private var alertTag = ""
     private var start :Long = 0
     private var end :Long = 0
-    private var location = MyLocation
+    lateinit var repository: Repository
 
 
     @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun doWork(): Result {
         alertViewModel = AlertViewModel(Repository.getInstance(WeatherClient.getInstance(), ConcreteLocalSource(applicationContext)))
         Log.i("TAG", "doWork: start dowork")
+        repository=Repository.getInstance(WeatherClient.getInstance(), ConcreteLocalSource(applicationContext))
         var description = ""
 
         try {
-            alertViewModel.getWeatherFromRoom("home","1")
+            repository.getSavedWeather("home","1").collect{
+                result->
+                val data = result.alert
+                if (data != null) {
+                    if (data.isEmpty()) {
+                        description =
+                            applicationContext.getString(R.string.weatherFineAlert)
+                        Log.i("TAG", "description: $description")
+                    } else {
+                        description = data[0].description
+                        Log.i("TAG", "description: $description")
+                    }
+                } else {
+                    description = applicationContext.getString(R.string.weatherFineAlert)
+                    Log.i("TAG", "description: $description")
+                }
+                val alertJsonString =
+                    inputData.getString(Constants.ALERT_JSON_STRING.toString())
+                val gson = Gson()
+                myAlertEntity = gson.fromJson(alertJsonString, AlertWeatherEntity::class.java)
+
+                Log.i("TAG", "myData: $myAlertEntity")
+                start = myAlertEntity.startTime
+                end = myAlertEntity.endTime
+                val notificationType = myAlertEntity.alertType
+                alertTag = myAlertEntity.id
+                var alertDesc = description
+                Log.i("TAG", "notificationType: $notificationType")
+                if (System.currentTimeMillis() in start..end) {
+                    if (notificationType == Constants.NOTIFICATION.toString()) {
+                        fireNotification(alertDesc)
+                        repository.deleteAlertWeather(myAlertEntity)
+
+                        val worker = WorkManager.getInstance(applicationContext)
+                        worker.cancelAllWorkByTag(alertTag)
+                    } else if (notificationType == Constants.ALARM.toString()) {
+                        withContext(Dispatchers.Main) {
+                            showAlertDialog(alertDesc)
+                        }
+                    }
+                }
+                res = Result.success()
+
+            }
+        /*    alertViewModel.getWeatherFromRoom("home","1")
             alertViewModel.homeWeather.collectLatest { result ->
                 when (result) {
                     is RoomState.Success -> {
@@ -84,16 +129,14 @@ class AlertWorker(appContext: Context, params: WorkerParameters) :
                         if (System.currentTimeMillis() in start..end) {
                             if (notificationType == Constants.NOTIFICATION.toString()) {
                                 fireNotification(alertDesc)
-                                alertViewModel.deleteALertWeatherFromRoom(myAlertEntity)
+                                repository.deleteAlertWeather(myAlertEntity)
 
                                 val worker = WorkManager.getInstance(applicationContext)
                                 worker.cancelAllWorkByTag(alertTag)
                             } else if (notificationType == Constants.ALARM.toString()) {
                                 withContext(Dispatchers.Main) {
                                     showAlertDialog(alertDesc)
-                                    alertViewModel.deleteALertWeatherFromRoom(myAlertEntity)
-
-                                }
+                                  }
                             }
                         }
                         res = Result.success()
@@ -102,7 +145,7 @@ class AlertWorker(appContext: Context, params: WorkerParameters) :
                         
                     }
                 }
-            }
+            }*/
             
         }catch (e:CancellationException){
             e.printStackTrace()
@@ -131,18 +174,23 @@ class AlertWorker(appContext: Context, params: WorkerParameters) :
         alertDialogBinding.alertAlarmDismissBtn.setOnClickListener {
             dialog.dismiss()
             mediaPlayer.release()
-            alertViewModel.deleteALertWeatherFromRoom(myAlertEntity)
+            CoroutineScope(Dispatchers.IO).launch{
+                repository.deleteAlertWeather(myAlertEntity)
+            }
             val worker = WorkManager.getInstance(applicationContext)
             worker.cancelAllWorkByTag(alertTag)
         }
         dialog.show()
         CoroutineScope(Dispatchers.Main).launch {
-            while (System.currentTimeMillis() < end) {
-                delay(end-start) // wait for 1 second
+            while (System.currentTimeMillis() <= end) {
+                delay(end-start)
             }
             dialog.dismiss()
             mediaPlayer.release()
-            alertViewModel.deleteALertWeatherFromRoom(myAlertEntity)
+            withContext(Dispatchers.IO){
+                repository.deleteAlertWeather(myAlertEntity)
+               // alertViewModel.getAlertWeatherFromRoom()
+            }
             val worker = WorkManager.getInstance(applicationContext)
             worker.cancelAllWorkByTag(alertTag)
         }
@@ -165,3 +213,4 @@ class AlertWorker(appContext: Context, params: WorkerParameters) :
         notificationManager.notify(1, notificationBuilder.build())
     }
 }
+

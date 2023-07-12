@@ -46,7 +46,6 @@ fun getDateInMillis(day: Int, month: Int, year: Int): Long {
 }
 fun getTimeInMillis(hours: Int, minutes: Int): Long {
     val cal = Calendar.getInstance()
-
     cal.set(Calendar.HOUR_OF_DAY,hours)
     cal.set(Calendar.MINUTE, minutes)
     cal.set(Calendar.SECOND, 0)
