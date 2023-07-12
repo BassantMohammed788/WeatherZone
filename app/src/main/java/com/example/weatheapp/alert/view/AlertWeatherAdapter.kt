@@ -32,7 +32,6 @@ class AlertDiffUtil : DiffUtil.ItemCallback<AlertWeatherEntity>() {
 class AlertWeatherAdapter(private var mySharedPreferences: MySharedPreferences, private var deleteListener: (AlertWeatherEntity) -> Unit) :
     ListAdapter<AlertWeatherEntity, AlertWeatherAdapter.AlertViewHolder>(AlertDiffUtil()) {
     lateinit var context: Context
-    lateinit var binding: AlertRowBinding
 
     inner class AlertViewHolder(val binding: AlertRowBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -41,9 +40,10 @@ class AlertWeatherAdapter(private var mySharedPreferences: MySharedPreferences, 
         val inflater: LayoutInflater =
             parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         context = parent.context
-        binding = AlertRowBinding.inflate(inflater, parent, false)
+        val binding = AlertRowBinding.inflate(inflater, parent, false)
         return AlertViewHolder(binding)
     }
+
 
     override fun onBindViewHolder(holder: AlertViewHolder, position: Int) {
         val currentObject = getItem(position)

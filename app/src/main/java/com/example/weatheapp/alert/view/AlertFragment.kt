@@ -92,8 +92,8 @@ class AlertFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
 
+        alertViewModel.getAlertWeatherFromRoom()
         lifecycleScope.launch {
-            alertViewModel.getAlertWeatherFromRoom()
             alertViewModel.alert.collectLatest { result ->
                 when (result) {
                     is LocalAlertState.Loading -> {
