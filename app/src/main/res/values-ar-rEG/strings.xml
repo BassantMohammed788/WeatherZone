@@ -90,4 +90,7 @@
     <string name="alertEndRequired">يجب إدخال تاريخ ووقت انتهاء التنبيه</string>
     <string name="alertTypeNotSelected">يجب اختيار نوع التنبيه</string>
     <string name="weatherFineAlert">الطقس جيد، لا يوجد تنبيهات للفترة المحددة</string>
+    <string name="enableNotification">تفعيل الإشعارات</string>
+    <string name="enableNotificationtBtn">تفعيل </string>
+    <string name="enableNotificationText">تحتاج إلى تفعيل الإشعارات لاستخدام هذه الميزة. هل ترغب في تفعيلها الآن؟</string>
 </resources>

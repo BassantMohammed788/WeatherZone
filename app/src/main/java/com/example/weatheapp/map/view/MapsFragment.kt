@@ -56,7 +56,7 @@ class MapsFragment : Fragment() {
         if (destination == Constants.HOME.toString()) {
             googleMap.setOnMapClickListener { latLng ->
                 val geocoder =
-                    Geocoder(requireContext(), Locale(mySharedPreferences.getLanguagePreference()!!))
+                    Geocoder(requireContext(), Locale.getDefault())
                 val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
                 if (addresses!!.isNotEmpty()) {
                     val address = addresses[0]
@@ -98,7 +98,7 @@ class MapsFragment : Fragment() {
             navView.visibility = View.GONE
             googleMap.setOnMapClickListener { latLng ->
                 val geocoder =
-                    Geocoder(requireContext(), Locale(mySharedPreferences.getLanguagePreference()!!))
+                    Geocoder(requireContext(), Locale.getDefault())
                 val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
                 if (addresses!!.isNotEmpty()) {
                     val address = addresses[0]

@@ -2,8 +2,12 @@ package com.example.weatheapp.home.view
 
 import MyLocation
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.location.Geocoder
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -43,6 +47,7 @@ class HomeFragment : Fragment() {
     lateinit var homeViewModel: HomeViewModel
     lateinit var dailyWeatherAdapter: DailyWeatherAdapter
     lateinit var hourlyWeatherAdapter: HourlyWeatherAdapter
+    private var connectivityReceiver: BroadcastReceiver?  = null
     lateinit var unit: String
     lateinit var windUnit: String
     var lat: Double = 2.0
@@ -54,7 +59,10 @@ class HomeFragment : Fragment() {
 
     }
 
-
+    override fun onStart() {
+        super.onStart()
+        checkNetworkAtRuntime()
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -108,103 +116,6 @@ class HomeFragment : Fragment() {
         binding.homeHourlyRecycler.layoutManager =
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
-        /*       if (isConnected(requireContext())) {
-
-            lifecycleScope.launch{
-                homeViewModel.getWeatherOverNetwork(lat, lng, unit!!, lang!!)
-                homeViewModel.weather.collectLatest { result ->
-                    when (result) {
-                        is ApiState.Loading -> {
-                            binding.homeProgreesBar.visibility = View.VISIBLE
-                            binding.homeConstraintLayout.visibility = View.GONE
-                        }
-                        is ApiState.Failure -> {
-                            Log.i("TAG", "onCreate: failed")
-                            binding.homeProgreesBar.visibility = View.GONE
-                            Snackbar.make(view, "No internet connection", Snackbar.LENGTH_LONG)
-                                .show()
-                        }
-                        is ApiState.Success -> {
-                            var entity = MyResponseEntity( countryName = getCountryName(requireContext(),lang), lat = lat, lon = lng, current = result.weather.current, hourly = result.weather.hourly, daily = result.weather.daily, alert = result.weather.alerts, type = "home")
-                            Log.i("roomEntityyy", "onViewCreated: roomEntityyy $entity")
-                            homeViewModel.insertWeatherIntoRoom(entity)
-                            binding.homeProgreesBar.visibility = View.GONE
-                            binding.homeConstraintLayout.visibility = View.VISIBLE
-                            binding.homeDateTv2.text = getCurrentDate(lang)
-                            binding.homeDegreeTv.text = "${result.weather.current.temp} ${getTemperatureUnit(requireContext(), unit)}"
-                            binding.homeWindTv.text =
-                                convertWindUnit(result.weather.current.wind_speed)
-                            binding.homePressyreTv.text =
-                                "${result.weather.current.pressure} ${context?.getString(R.string.hpa)}"
-                            binding.homeHumidityTv.text = "${result.weather.current.humidity} %"
-                            binding.homeVisibilityTv.text =
-                                "${result.weather.current.visibility} ${context?.getString(R.string.visbilitym)}"
-                            binding.homeUltraTv.text = "${result.weather.current.uvi}"
-                            binding.homeCloudTv.text = "${result.weather.current.clouds} %"
-                            binding.homeCityTv.text = getCountryName(requireContext(), lang)
-                            binding.homeWeatherDescTv.text =
-                                result.weather.current.weather[0].description
-                            val drawableResId = getIconResource(
-                                result.weather.current.weather[0].icon,
-                                requireContext()
-                            )
-                            Log.i("resu", "onViewCreated: ${result.weather.current.weather[0].icon}")
-                            binding.homeWeatherIcon.setImageResource(drawableResId)
-                            dailyWeatherAdapter.submitList(result.weather.daily)
-                            hourlyWeatherAdapter.submitList(result.weather.hourly)
-                        }
-                    }
-                }
-            }
-        } else {
-            lifecycleScope.launch {
-                homeViewModel.getWeatherFromRoom("home")
-                homeViewModel.homeWeather.collect { result ->
-                    when (result) {
-                        is RoomState.Loading -> {
-                            binding.homeProgreesBar.visibility = View.VISIBLE
-                            binding.homeConstraintLayout.visibility = View.GONE
-                        }
-                        is RoomState.Failure -> {
-                            binding.homeProgreesBar.visibility = View.GONE
-                            Snackbar.make(view, R.string.CheckYourconnection, Snackbar.LENGTH_LONG).show()
-                            Log.i("TAG", "onViewCreated: $result")
-                        }
-                        is RoomState.Success -> {
-                                Snackbar.make(view, R.string.NoInternetconnection, Snackbar.LENGTH_LONG).show()
-                                binding.homeProgreesBar.visibility = View.GONE
-                                binding.homeConstraintLayout.visibility = View.VISIBLE
-                                binding.homeDateTv2.text = getCurrentDate(lang!!)
-                                binding.homeDegreeTv.text = "${result.weather.last().current?.temp} ${getTemperatureUnit(requireContext(), unit)}"
-                                binding.homeWindTv.text = convertWindUnit(result.weather.last().current!!.wind_speed)
-                                binding.homePressyreTv.text = "${result.weather.last().current?.pressure} ${context?.getString(R.string.hpa)}"
-                                binding.homeHumidityTv.text = "${result.weather.last().current!!.humidity} %"
-                                binding.homeVisibilityTv.text = "${result.weather.last().current!!.visibility} ${context?.getString(R.string.visbilitym)}"
-                                binding.homeUltraTv.text = "${result.weather.last().current!!.uvi}"
-                                binding.homeCloudTv.text = "${result.weather.last().current!!.clouds} %"
-                                binding.homeCityTv.text = result.weather.last().countryName
-                                binding.homeWeatherDescTv.text =
-                                    result.weather.last().current!!.weather[0].description
-                                val drawableResId = getIconResource(
-                                    result.weather.last().current!!.weather[0].icon,
-                                    requireContext()
-                                )
-                                Log.i(
-                                    "resu",
-                                    "onViewCreated: ${result.weather.last().current!!.weather[0].icon}"
-                                )
-                                binding.homeWeatherIcon.setImageResource(drawableResId)
-                                dailyWeatherAdapter.submitList(result.weather.last().daily)
-                                hourlyWeatherAdapter.submitList(result.weather.last().hourly)
-
-                        }
-                        else -> {}
-                    }
-                }
-            }
-        }
-    }
-*/
 
         if (isConnected(requireContext())) {
             lifecycleScope.launch {
@@ -350,5 +261,27 @@ class HomeFragment : Fragment() {
             navView?.visibility = View.VISIBLE
         }
     }
+    private fun checkNetworkAtRuntime()
+    {
+        val connectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
 
+        connectivityReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                val networkInfo = connectivityManager.activeNetworkInfo
+
+                if (networkInfo == null || !networkInfo.isConnected) {
+                    Snackbar.make(view!!, R.string.NoInternetconnection, Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        activity?.registerReceiver(connectivityReceiver, intentFilter)
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        activity?.unregisterReceiver(connectivityReceiver)
+    }
 }

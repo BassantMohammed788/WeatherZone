@@ -57,13 +57,13 @@ fun getTimeInMillis(hours: Int, minutes: Int): Long {
 fun getTimeStringFromMillis(millis: Long, language: String): String {
     val cal = Calendar.getInstance()
     cal.timeInMillis = millis
-    val dateFormat = SimpleDateFormat("h:mm a", Locale(language))
+    val dateFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
     return dateFormat.format(cal.time)
 }
 fun getDateStringFromMillis(millis: Long, language: String): String {
     val cal = Calendar.getInstance()
     cal.timeInMillis = millis
-    val dateFormat = SimpleDateFormat("EEE d MMM", Locale(language))
+    val dateFormat = SimpleDateFormat("EEE d MMM", Locale.getDefault())
     return dateFormat.format(cal.time)
 }
 @RequiresApi(Build.VERSION_CODES.M)

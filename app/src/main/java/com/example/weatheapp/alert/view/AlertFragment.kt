@@ -82,6 +82,7 @@ class AlertFragment : Fragment() {
                 ConcreteLocalSource(requireContext())
             )
         )
+        mySharedPreferences=MySharedPreferences.getInstance(requireContext())
         alertViewModel =
             ViewModelProvider(this, alertiewModelFactory).get(AlertViewModel::class.java)
 
@@ -126,9 +127,10 @@ class AlertFragment : Fragment() {
 
         binding.alertFAB.setOnClickListener {
             val isPermissionGranted = requestOverlayPermission(this)
-            if(isPermissionGranted){
-            displayAlertDialog()
-            }else{
+            if(isPermissionGranted) {
+                displayAlertDialog()
+            }
+           else{
                 Toast.makeText(requireContext(),R.string.permissionrequiredtoaddalert,Toast.LENGTH_SHORT)
             }
         }
@@ -168,6 +170,20 @@ class AlertFragment : Fragment() {
                 }
                 alertDialog.alertDialogNotificationRadioButton.id -> {
                     alarmOrNotification=Constants.NOTIFICATION.toString()
+                    if(mySharedPreferences.getNotificationStatusPreference()==Constants.DISABLED.toString()){
+                        val builder = AlertDialog.Builder(requireContext())
+                        builder.setTitle(R.string.enableNotification)
+                            .setMessage(R.string.enableNotificationText)
+                            .setPositiveButton(R.string.enableNotificationtBtn) { _, _ ->
+                                mySharedPreferences.saveNotificationStatusPreference(Constants.ENABLED.toString())
+                                mySharedPreferences.saveNotificationStatusPreference(Constants.ENABLED.toString())
+
+                            }
+                            .setNegativeButton(R.string.CancelMapAlert) { _, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
+                    }
                 }
             }
         }
@@ -196,61 +212,6 @@ class AlertFragment : Fragment() {
                 val alertJsonString = gson.toJson(alertEntity)
                 Log.i("TAG", "jsonString: $alertJsonString")
 
-               /* lifecycleScope.launch {
-                        alertViewModel.getWeatherFromRoom()
-                        alertViewModel.homeWeather.collectLatest { result ->
-                            when (result) {
-                                is RoomState.Success -> {
-                                    Log.i("TAG", "displayAlertDialog: ${alertEntity.id}")
-                                    var data = result.weather.alert
-                                    if (data != null) {
-                                        if (data.isEmpty()) {
-                                            description = "Weather is fine"
-                                        } else {
-                                            description = data[0].tags[0]
-                                        }
-                                    }else{
-                                        description = "Weather is fine"
-                                    }
-                                    val currentDateTimeInMillis = System.currentTimeMillis()
-                                    val delay = startTime-currentDateTimeInMillis
-
-                                    Log.i("TAG", "start: ${formatDate(startTime)} ")
-
-                                    Log.i("TAG", "end: ${formatDate(endTime)} ")
-                                    Log.i("TAG", "current: ${formatDate(currentDateTimeInMillis)} ")
-
-                                    if (!isWorkRequestEnqueued) {
-                                        val inputData = Data.Builder()
-                                            .putString(
-                                                Constants.ALERT_JSON_STRING.toString(),
-                                                alertJsonString
-                                            ).build()
-
-                                        val myRequest: WorkRequest =
-                                            OneTimeWorkRequestBuilder<AlertWorker>()
-                                                .setInputData(inputData)
-                                                .setInitialDelay(delay, TimeUnit.MILLISECONDS)
-                                                .addTag(alertEntity.id)
-                                                .build()
-
-
-                                        Log.i("TAG", "displayAlertDialog: request")
-                                        WorkManager.getInstance(requireContext())
-                                            .enqueue(myRequest)
-                                        Log.i("TAG", "displayAlertDialog: enqueue")
-                                        isWorkRequestEnqueued = true
-                                    }
-                                    dialog.dismiss()
-                                    val fragment = AlertFragment()
-                                    val transaction = parentFragmentManager.beginTransaction()
-                                    transaction.replace(R.id.nav_host, fragment)
-                                    transaction.commit()
-                                }
-                                else -> {}
-                            }
-                        }
-                }*/
                 val currentDateTimeInMillis = System.currentTimeMillis()
                 val delay = startTime-currentDateTimeInMillis
 
@@ -295,12 +256,13 @@ class AlertFragment : Fragment() {
             requireContext(),
             { _, year, month, dayOfMonth ->
 
+
                 val selectedDate = Calendar.getInstance()
                 selectedDate.set(Calendar.YEAR, year)
                 selectedDate.set(Calendar.MONTH, month)
                 selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-                val selectedDateString = SimpleDateFormat("EEE d MMM yyyy", Locale(mySharedPreferences.getLanguagePreference()!!)).format(selectedDate.time)
+                val selectedDateString = SimpleDateFormat("EEE d MMM yyyy", Locale.getDefault()).format(selectedDate.time)
 
                 if (selectedDateType == "start") {
                     startDateString = selectedDateString
@@ -328,6 +290,7 @@ class AlertFragment : Fragment() {
         datePickerDialog.datePicker.maxDate = maxDate
 
         datePickerDialog.show()
+
     }
 
     fun showTimePicker(selectedTimeType: String, time: TextView) {
@@ -339,7 +302,7 @@ class AlertFragment : Fragment() {
                 selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 selectedTime.set(Calendar.MINUTE, minute)
 
-                val selectedTimeString = SimpleDateFormat("h:mm a", Locale(mySharedPreferences.getLanguagePreference()!!)).format(selectedTime.time)
+                val selectedTimeString = SimpleDateFormat("h:mm a", Locale.getDefault()).format(selectedTime.time)
 
                 if (selectedTimeType == "start") {
                     startTime = getTimeInMillis(hourOfDay,minute)

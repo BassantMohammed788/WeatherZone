@@ -95,4 +95,10 @@
     <string name="alertTypeNotSelected">You must select an alert type</string>
     <string name="weatherFineAlert">Weather is fine, no alerts for the scheduled period</string>
 
+    <string name="enableNotification">Enable Notifications</string>
+
+    <string name="enableNotificationText">you need to enable notifications to use this feature. Would you like to enable them now?</string>
+
+
+    <string name="enableNotificationtBtn">Enable </string>
 </resources>

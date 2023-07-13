@@ -29,7 +29,13 @@ class IntialSetupFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mySharedPreferences = MySharedPreferences.getInstance(requireContext())
         binding.intialRadioGroup.clearCheck()
-        binding.intialOkBtn.setOnClickListener {
+        binding.intialNotificationSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                mySharedPreferences.saveNotificationStatusPreference(Constants.ENABLED.toString())
+            } else {
+                mySharedPreferences.saveNotificationStatusPreference(Constants.DISABLED.toString())
+            }}
+            binding.intialOkBtn.setOnClickListener {
             mySharedPreferences.saveTempratureUnitPreference(Constants.standard.toString())
             mySharedPreferences.saveWindSpeedUnitPreference(Constants.metr.toString())
             // Check which radio button is selected and take action accordingly
@@ -55,7 +61,6 @@ class IntialSetupFragment : Fragment() {
                     getLastLocation(requireContext()) { location ->
                         binding.gpsProgreesBar.visibility = View.GONE // Hide the progress bar
                         if (location != null) {
-                            // Location found, do something with it
                             val intent = Intent(requireContext(), MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
