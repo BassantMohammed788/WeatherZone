@@ -1,7 +1,9 @@
 #WeaatherZone App
+
 This Android application displays weather information and temperature from your current location. You can also select a specific location on the map . The app allows you to add favorite locations and view weather details for those locations. Additionally, you can set alerts for various weather conditions such as rain, wind, temperature, fog, snow, and more.
 
 #Features
+
 1-Current temperature display
 
 2-Current date and time
@@ -23,6 +25,7 @@ This Android application displays weather information and temperature from your 
 10-Weather alerts with customizable alarm settings
 
 #Screens
+
 The app consists of the following screens:
 
 1-Settings Screen: Allows users to choose location options and temperature units.
@@ -34,9 +37,11 @@ The app consists of the following screens:
 4-Favorite Screen: Lists favorite locations with the ability to view forecast details for each location. Users can add new favorite locations using the map or auto-complete text search.
 
 #Architecture
+
 The project follows the MVVM (Model-View-ViewModel) design pattern, which separates the user interface (View) from the underlying data (Model) and introduces a ViewModel to handle the business logic and communication between the View and Model. This pattern promotes a clean architecture and facilitates easier testing and maintenance of the codebase.
 
 #Libraries
+
 The project utilizes the following dependencies:
 
 1- Retrofit - Type-safe HTTP client for API requests.
@@ -48,7 +53,10 @@ The project utilizes the following dependencies:
 4- Lottie: For the splash screen animation.
 
 #Unit Testing
+
 The project includes unit testing for the ViewModel and Repository components. Unit testing is an essential part of software development, as it helps ensure the correctness and reliability of the code.
 
-#SDK![androidwe](https://github.com/BassantMohammed788/Weathe_App/assets/100326081/022713d6-f03a-4e65-b069-d476b83c533b)
+#SDK
+
+![androidwe](https://github.com/BassantMohammed788/Weathe_App/assets/100326081/022713d6-f03a-4e65-b069-d476b83c533b)
 
